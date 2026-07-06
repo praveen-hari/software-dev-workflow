@@ -68,7 +68,7 @@ When the task involves building UI pages, dashboards, or forms:
 
 - Detect the project stack from project files
 - Check if the matching Syncfusion UI Builder is installed (it is a per-project dependency, not bundled)
-- If installed: route to the correct UI Builder agent
+- If installed: **MUST activate the Syncfusion UI Builder agent** for all UI page/dashboard/form generation
 - If NOT installed: inform the user with the install command, then fall back to `incremental-implementation` + `frontend-ui-engineering`
 - After UI generation: write tests, review code, then commit
 

@@ -129,9 +129,10 @@ or skill folder in the installed skills directory.
 ```
 UI Builder installed?
     │
-    ├── YES → Route to the UI Builder agent
+    ├── YES → MUST activate the Syncfusion UI Builder agent
     │         (it runs its own 8-stage workflow: Intent → Detect → Map →
     │          Theme → Code → Deps → Validate → Insert)
+    │         The UI Builder consumes tokens.css from the design system.
     │
     ├── NO  → Tell the user:
     │         "Detected [Framework] project. To enable Syncfusion UI generation, run:
@@ -160,7 +161,7 @@ write tests, review code, check security, then commit.
 | | `context-engineering` | When context quality drops |
 | | `frontend-ui-engineering` | UI work (non-Syncfusion or overlay) |
 | | `api-and-interface-design` | API or module boundary work |
-| | Syncfusion UI Builder | UI work on Syncfusion stack (auto-detected; install per-project) |
+| | Syncfusion UI Builder (MUST activate when installed) | UI work on Syncfusion stack — MUST activate the UI Builder agent when installed. If not installed, prompt user to install. Fall back to agent-skills only if user explicitly declines. |
 | **Verify** | `debugging-and-error-recovery` | Something broke or behaves unexpectedly |
 | | `browser-testing-with-devtools` | Web frontend verification |
 | **Review** | `code-review-and-quality` | Always before merge |
@@ -209,7 +210,8 @@ Common excuses the agent must reject:
 | "It's a small change, skip review" | Small changes cause big outages. Review everything. |
 | "Security isn't relevant here" | If it handles user input or data, security is relevant. |
 | "Let me refactor this adjacent code too" | Stay in scope. File a separate task for refactoring. |
-| "The UI Builder handles everything" | UI Builder generates frontend. You still need specs, tests, and review. |
+| "The UI Builder handles everything" | UI Builder generates frontend. You still need design tokens, specs, tests, and review. |
+| "I'll write the UI manually" | If the Syncfusion UI Builder is installed, you MUST activate it for page/dashboard/form generation. Manual UI code is only for non-Syncfusion stacks or when the user explicitly declines installation. |
 | "This is just a prototype" | Prototypes become production. Build it right from the start. |
 | "I'll pick colors as I go" | No. Activate the `design-system` skill and finalize DESIGN.md first. All UI code uses tokens.css. |
 | "The design system can come later" | Design before UI code. Run `/design` to activate the `design-system` skill before `/build`. |

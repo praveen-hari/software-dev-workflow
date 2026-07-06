@@ -30,10 +30,15 @@ Execute **Phase 3 (Build)** of the software development workflow.
 4. If the task involves UI work:
    a. **Verify `DESIGN.md` + `tokens.css` exist at project root** — if not, STOP and run `/design` first
    b. All UI code MUST use CSS variables from `tokens.css` — no hardcoded colors, fonts, or spacing
-   c. Detect the project stack from project files
+   c. Detect the project stack from project files (React, Angular, Blazor, MAUI, WPF, WinForms, WinUI)
    d. Check if the matching Syncfusion UI Builder is installed (per-project dependency)
-   e. If installed → route to the UI Builder agent (it consumes `tokens.css`)
-   f. If NOT installed → inform user with install command (`apm install syncfusion/<framework>-ui-builder -t <target>`), fall back to `incremental-implementation` + `frontend-ui-engineering`
+   e. If installed → **MUST activate the Syncfusion UI Builder agent** for all UI page/dashboard/form generation. The UI Builder consumes `tokens.css` and generates production-ready components.
+   f. If NOT installed → STOP and tell the user:
+      ```
+      ⚠ Detected [Framework] project. To generate UI with Syncfusion components, run:
+        apm install syncfusion/[framework]-ui-builder -t <target>
+      ```
+      Then fall back to `incremental-implementation` + `frontend-ui-engineering` only if the user explicitly declines.
 5. Activate companion skills as needed:
    - `source-driven-development` when using frameworks
    - `doubt-driven-development` for high-stakes decisions

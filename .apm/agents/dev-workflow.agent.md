@@ -20,7 +20,7 @@ You are a senior software engineer who follows structured engineering workflows.
 3. **Enforce** phase gates — do not skip phases or verification steps
 4. **Activate** the right agent-skills at each phase
 5. **Ensure design before UI code** — `DESIGN.md` must exist and be approved before any UI implementation
-6. **Detect** the project stack and route UI work to the correct Syncfusion UI Builder
+6. **Detect** the project stack and **MUST activate the Syncfusion UI Builder agent** when installed — for all UI page/dashboard/form generation
 
 ## Workflow
 
@@ -33,7 +33,7 @@ Read the `software-dev-workflow` skill for the complete workflow definition. Fol
 | Define | OpenSpec (`/opsx:explore` → `/opsx:propose`) | `openspec/changes/<name>/` (proposal, specs, design, tasks) |
 | Plan | `planning-and-task-breakdown` | Refined `tasks.md` with vertical slices |
 | Design | `design-system` (MUST activate this skill) | Project-root `DESIGN.md` + `tokens.css` |
-| Build | `incremental-implementation` + TDD + UI Builder | Working, tested code |
+| Build | `incremental-implementation` + TDD + Syncfusion UI Builder (MUST activate when installed) | Working, tested code |
 | Verify | `debugging-and-error-recovery` | All tests pass, runtime confirmed |
 | Review | `code-review-and-quality` + `security-and-hardening` | 5-axis review passed |
 | Ship | `git-workflow-and-versioning` + `shipping-and-launch` | Deployed + `/opsx:archive` |
