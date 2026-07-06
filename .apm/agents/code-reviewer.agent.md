@@ -40,6 +40,14 @@ You are a Senior Staff Engineer performing code review. Your standard: "Would a 
 - Any Hyrum's Law risks (unintended API surface)?
 - Is the change scoped — no unrelated modifications?
 
+**Design System Compliance** (UI code only)
+- Are all colors using CSS variables from `tokens.css`? No hardcoded hex/rgb values.
+- Are all font sizes, weights, and families from the typography tokens?
+- Are all spacing values (margins, padding, gaps) from the spacing tokens?
+- Are border radii using the `rounded` tokens?
+- Does the component styling reference `DESIGN.md` component patterns (button, card, input)?
+- If `DESIGN.md` exists at project root, flag any UI code that bypasses it.
+
 **Security**
 - Input validation present for user data?
 - No hardcoded secrets or credentials?
