@@ -1,0 +1,32 @@
+name: software-dev-workflow
+version: 1.0.0
+description: >
+  Production-grade software development workflow that orchestrates a 6-phase
+  lifecycle (Define → Plan → Build → Verify → Review → Ship) for any tech stack.
+  Combines 24 engineering skills from agent-skills with Syncfusion UI Builders
+  for React, Angular, Blazor, .NET MAUI, WPF, WinForms, and WinUI.
+  Use when starting a new project, building features, fixing bugs, or shipping
+  to production. Enforces spec-driven development, test-driven development,
+  code review, security hardening, and incremental delivery.
+author: Syncfusion Inc
+targets:
+  - copilot
+  - claude
+  - cursor
+  - codex
+  - gemini
+  - windsurf
+  - kiro
+  - opencode
+dependencies:
+  apm:
+    # Engineering discipline — 24 production-grade skills
+    - addyosmani/agent-skills
+    # Syncfusion UI Builders — framework-specific frontend generation
+    - syncfusion/react-ui-builder
+    - syncfusion/angular-ui-builder
+    - syncfusion/blazor-ui-builder
+    - syncfusion/maui-ui-builder
+    - syncfusion/wpf-ui-builder
+    - syncfusion/winforms-ui-builder
+    - syncfusion/winui-ui-builder
