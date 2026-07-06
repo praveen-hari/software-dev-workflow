@@ -152,7 +152,7 @@ write tests, review code, check security, then commit.
 | **Define** | OpenSpec `/opsx:explore` | Requirements are vague or underspecified |
 | | OpenSpec `/opsx:propose` | Always for non-trivial work — creates change folder with proposal, specs, design, tasks |
 | **Plan** | `planning-and-task-breakdown` | To refine `openspec/changes/<name>/tasks.md` after proposal is approved |
-| **Design** | `design-system` | When tasks include UI work and no `DESIGN.md` exists — creates color palette, typography, spacing tokens |
+| **Design** | `design-system` (MUST activate) | When tasks include UI work and no `DESIGN.md` exists — MUST run the `design-system` skill to create color palette, typography, spacing tokens. Never create DESIGN.md without this skill. |
 | **Build** | `incremental-implementation` | Always — build in vertical slices |
 | | `test-driven-development` | Always — red-green-refactor per slice |
 | | `source-driven-development` | When using frameworks/libraries |
@@ -211,14 +211,18 @@ Common excuses the agent must reject:
 | "Let me refactor this adjacent code too" | Stay in scope. File a separate task for refactoring. |
 | "The UI Builder handles everything" | UI Builder generates frontend. You still need specs, tests, and review. |
 | "This is just a prototype" | Prototypes become production. Build it right from the start. |
+| "I'll pick colors as I go" | No. Activate the `design-system` skill and finalize DESIGN.md first. All UI code uses tokens.css. |
+| "The design system can come later" | Design before UI code. Run `/design` to activate the `design-system` skill before `/build`. |
+| "I'll just use Tailwind defaults" | The project has its own design tokens in DESIGN.md. Use `tokens.css` variables, not framework defaults. |
 
 ## Quick Reference
 
 | Command | Phase | What Happens |
 |---------|-------|-------------|
-| `/spec` | Define | Interview → Idea Refine → Write PRD |
-| `/plan` | Plan | Break spec into vertical slices with acceptance criteria |
-| `/build` | Build | Implement slice-by-slice with TDD + UI Builder if applicable |
+| `/spec` | Define | OpenSpec: `/opsx:explore` → `/opsx:propose` → creates change folder |
+| `/plan` | Plan | Refine `openspec/changes/<name>/tasks.md` with vertical slices |
+| `/design` | Design | **MUST activate `design-system` skill** → creates `DESIGN.md` + `tokens.css` at project root |
+| `/build` | Build | Reads tasks, implements slice-by-slice with TDD. UI code consumes `tokens.css`. |
 | `/test` | Verify | Run tests, debug failures, verify at runtime |
-| `/review` | Review | 5-axis code review + security + performance audit |
-| `/ship` | Ship | Git workflow → CI/CD → Deploy → Monitor |
+| `/review` | Review | 6-axis code review (correctness, readability, architecture, design compliance, security, performance) |
+| `/ship` | Ship | Git workflow → CI/CD → Deploy → Monitor → `/opsx:archive` |

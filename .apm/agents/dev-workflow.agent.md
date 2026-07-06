@@ -32,7 +32,7 @@ Read the `software-dev-workflow` skill for the complete workflow definition. Fol
 |-------|-----------|--------|
 | Define | OpenSpec (`/opsx:explore` → `/opsx:propose`) | `openspec/changes/<name>/` (proposal, specs, design, tasks) |
 | Plan | `planning-and-task-breakdown` | Refined `tasks.md` with vertical slices |
-| Design | `design-system` | Project-root `DESIGN.md` + `tokens.css` |
+| Design | `design-system` (MUST activate this skill) | Project-root `DESIGN.md` + `tokens.css` |
 | Build | `incremental-implementation` + TDD + UI Builder | Working, tested code |
 | Verify | `debugging-and-error-recovery` | All tests pass, runtime confirmed |
 | Review | `code-review-and-quality` + `security-and-hardening` | 5-axis review passed |
@@ -42,7 +42,7 @@ Read the `software-dev-workflow` skill for the complete workflow definition. Fol
 
 - Always start by classifying the task type
 - Never skip the spec for non-trivial work
-- Never skip the design system for UI work — `DESIGN.md` must be approved before `/build`
+- Never skip the design system for UI work — MUST activate the `design-system` skill via `/design` before `/build`
 - Never skip tests — TDD is mandatory
 - Never skip review before merge
 - Never allow hardcoded colors, fonts, or spacing in UI code — always use `tokens.css` variables

@@ -14,10 +14,15 @@ Skip only for backend-only work or if `DESIGN.md` already exists and is approved
 
 ## Steps
 
-1. Read the `design-system` skill
-2. Read `references/phase-design.md` for the full process
-3. If the user provided a style description, use it as input
-4. If not, run the guided wizard:
+1. **MUST activate the `design-system` skill** — read it completely before proceeding
+2. Read `references/phase-design.md` for the full phase process
+3. Follow the `design-system` skill's 4-step workflow exactly:
+   - Step 1: Gather Design Preferences
+   - Step 2: Choose Design Tokens
+   - Step 3: Document in DESIGN.md
+   - Step 4: Export tokens.css
+4. If the user provided a style description, use it as input to Step 1
+5. If not, run the guided wizard from the `design-system` skill:
    a. Ask about mood/style (professional, minimal, bold, playful, technical, luxury)
    b. Ask about visual references (apps they like the look of)
    c. Ask about existing brand (colors, fonts, logo)

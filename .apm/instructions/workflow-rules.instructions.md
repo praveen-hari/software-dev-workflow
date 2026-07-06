@@ -46,7 +46,8 @@ and move the change folder to `openspec/changes/archive/`.
 
 When the project involves frontend UI:
 
-- **Design before UI code** — `DESIGN.md` must be approved before any UI implementation
+- **MUST activate `design-system` skill** — Run `/design` which activates the `design-system` skill. Never create `DESIGN.md` manually or skip this skill.
+- **Design before UI code** — `DESIGN.md` + `tokens.css` must exist at project root and be approved before any UI implementation
 - **No hardcoded values** — All colors, fonts, spacing, and radii must use CSS variables from `tokens.css`
 - **Accent = interactive only** — The accent color is reserved for buttons, links, focus rings, and toggles
 - **WCAG contrast required** — Text on background ≥ 4.5:1, interactive elements ≥ 3:1

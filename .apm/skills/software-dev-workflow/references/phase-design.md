@@ -25,9 +25,9 @@ design system is confirmed by the user.
 
 ## Skill Activated
 
-### `design-system`
+### `design-system` (MUST activate)
 
-Activate the `design-system` skill. It runs a 4-step process:
+You **MUST** activate the `design-system` skill. Do NOT create `DESIGN.md` manually or skip this skill. It runs a 4-step process:
 
 ### Step 1: Gather Design Preferences
 
