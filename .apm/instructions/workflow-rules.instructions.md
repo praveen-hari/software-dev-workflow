@@ -16,11 +16,29 @@ These rules apply to ALL work in this project. They are non-negotiable.
 Before starting any work, classify the task:
 
 - **New feature / project** → Full lifecycle: `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship`
-- **Feature with clear requirements** → Start at `/plan`
+  - `/spec` uses OpenSpec (`/opsx:explore` → `/opsx:propose`) to create a change folder
+  - `/plan` refines `openspec/changes/<name>/tasks.md`
+  - `/build` reads tasks from the OpenSpec change folder
+- **Feature with clear requirements** → Start at `/plan` (or `/opsx:propose` directly)
 - **Bug fix** → `debugging-and-error-recovery` → TDD → review → ship
 - **Refactor** → `code-simplification` → TDD → review → ship
 - **Hotfix** → Debug → fix → test → ship (fast track)
 - **Trivial change** → Just do it with TDD + commit
+
+## Artifact Storage (OpenSpec)
+
+All specs, proposals, designs, and tasks are stored in OpenSpec change folders:
+
+```
+openspec/changes/<feature-name>/
+├── proposal.md     ← Why + scope (from /spec)
+├── specs/          ← Delta specs (behavior changes)
+├── design.md       ← Technical approach
+└── tasks.md        ← Implementation checklist (from /plan)
+```
+
+When a feature ships, run `/opsx:archive` to merge delta specs into `openspec/specs/`
+and move the change folder to `openspec/changes/archive/`.
 
 ## Non-Negotiable Rules
 
@@ -37,8 +55,19 @@ Before starting any work, classify the task:
 When the task involves building UI pages, dashboards, or forms:
 
 - Detect the project stack from project files
-- Route to the correct Syncfusion UI Builder agent
+- Check if the matching Syncfusion UI Builder is installed (it is a per-project dependency, not bundled)
+- If installed: route to the correct UI Builder agent
+- If NOT installed: inform the user with the install command, then fall back to `incremental-implementation` + `frontend-ui-engineering`
 - After UI generation: write tests, review code, then commit
+
+UI Builder install commands:
+- `apm install syncfusion/react-ui-builder -t <target>`
+- `apm install syncfusion/angular-ui-builder -t <target>`
+- `apm install syncfusion/blazor-ui-builder -t <target>`
+- `apm install syncfusion/maui-ui-builder -t <target>`
+- `apm install syncfusion/wpf-ui-builder -t <target>`
+- `apm install syncfusion/winforms-ui-builder -t <target>`
+- `apm install syncfusion/winui-ui-builder -t <target>`
 
 ## Quality Bar
 

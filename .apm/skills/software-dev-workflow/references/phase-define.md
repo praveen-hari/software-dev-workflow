@@ -1,8 +1,17 @@
-# Phase 1 — Define
+# Phase 1 — Define (via OpenSpec)
 
 ## Purpose
 
-Get 100% clarity on WHAT to build before writing any code. This phase produces a specification document that becomes the shared source of truth.
+Get 100% clarity on WHAT to build before writing any code. This phase uses [OpenSpec](https://openspec.dev/) to produce a self-contained change folder with proposal, specs, design, and tasks — all co-located.
+
+## Prerequisites
+
+OpenSpec must be initialized in the project. If `openspec/` directory does not exist:
+
+```bash
+npm install -g @fission-ai/openspec@latest
+openspec init
+```
 
 ## When to Enter
 
@@ -17,42 +26,48 @@ Get 100% clarity on WHAT to build before writing any code. This phase produces a
 - Requirements are already documented and unambiguous
 - Bug fixes (use the bug-fix route instead)
 
-## Skill Sequence
+## Workflow
 
-### Step 1: Extract Intent — `interview-me`
+### Step 1: Explore (optional) — `/opsx:explore`
 
-If the request is underspecified, activate the `interview-me` skill:
+If the request is underspecified or the approach is unclear, use OpenSpec's explore command:
 
-- Ask one question at a time until ~95% confidence about the underlying intent
-- Surface what the user actually wants, not what they think they should want
-- Do NOT proceed until requirements are concrete
+- `/opsx:explore` is a no-stakes thinking partner that reads the codebase, weighs options, and shapes a plan
+- It replaces the `interview-me` and `idea-refine` skills for the Define phase
+- Output: a concrete direction agreed upon before any artifacts are created
 
-**Skip if:** The user has already provided detailed, unambiguous requirements.
+**Skip if:** The user already has clear, detailed requirements.
 
-### Step 2: Refine Ideas — `idea-refine`
+### Step 2: Propose — `/opsx:propose <feature-name>`
 
-If the concept needs exploration, activate the `idea-refine` skill:
+Create a change folder with all planning artifacts in one step:
 
-- Structured divergent thinking: generate 3-5 approaches
-- Convergent thinking: evaluate tradeoffs, select the best approach
-- Output: a concrete proposal with clear rationale
+```
+/opsx:propose add-dark-mode
+```
 
-**Skip if:** The approach is already decided and agreed upon.
+OpenSpec creates:
+```
+openspec/changes/add-dark-mode/
+├── proposal.md     ← Why we're doing this, scope, approach
+├── specs/          ← Delta specs (ADDED/MODIFIED/REMOVED requirements)
+├── design.md       ← Technical approach, architecture decisions
+└── tasks.md        ← Implementation checklist with checkboxes
+```
 
-### Step 3: Write the Spec — `spec-driven-development`
+The proposal covers:
+1. **Intent** — What are we building and why?
+2. **Scope** — What's in scope and what's explicitly out of scope
+3. **Approach** — High-level technical direction
 
-Activate the `spec-driven-development` skill. Write a specification covering:
-
-1. **Objective** — What are we building and why? Who is the user? What does success look like?
-2. **Commands** — Full executable commands (build, test, lint, dev)
-3. **Project Structure** — Where source code, tests, and docs live
-4. **Code Style** — One real code snippet showing the style
-5. **Testing Strategy** — Framework, location, coverage expectations
-6. **Boundaries** — Always do / Ask first / Never do
+The delta specs cover:
+- **ADDED requirements** — New behavior
+- **MODIFIED requirements** — Changed behavior (with "Previously:" note)
+- **REMOVED requirements** — Deprecated behavior
 
 ### User Gate
 
-Present the spec to the user for review. Do NOT proceed to Phase 2 until the user approves.
+Present the proposal and specs for user review. Do NOT proceed to Phase 2 until the user approves.
 
 ```
 ASSUMPTIONS I'M MAKING:
@@ -64,15 +79,26 @@ ASSUMPTIONS I'M MAKING:
 
 ## Exit Criteria
 
-- [ ] Spec document written and covers all 6 areas
+- [ ] OpenSpec change folder created at `openspec/changes/<feature-name>/`
+- [ ] `proposal.md` covers intent, scope, and approach
+- [ ] `specs/` contains delta specs with ADDED/MODIFIED/REMOVED sections
 - [ ] Assumptions surfaced and confirmed
-- [ ] User has reviewed and approved the spec
+- [ ] User has reviewed and approved
 - [ ] Ambiguities resolved — no open questions remain
 
 ## Output Artifacts
 
-- `specs/<feature-name>.md` — The specification document
+```
+openspec/changes/<feature-name>/
+├── proposal.md
+├── specs/
+├── design.md
+└── tasks.md
+```
+
+> **Migration note:** This replaces the old `specs/<feature-name>.md` flat file.
+> All artifacts for a feature are now co-located in one OpenSpec change folder.
 
 ## Transition
 
-→ Proceed to **Phase 2 — Plan** (read `phase-plan.md`)
+→ Proceed to **Phase 2 — Plan** (read `phase-plan.md`) to refine `tasks.md`

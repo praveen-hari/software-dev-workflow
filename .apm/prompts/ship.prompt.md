@@ -26,6 +26,10 @@ Execute **Phase 6 (Ship)** of the software development workflow.
    - Staged rollout plan (if applicable)
    - Monitoring dashboards ready
 6. If retiring old code, activate `deprecation-and-migration`
+7. After successful deployment, archive the OpenSpec change:
+   - Run `/opsx:archive` to merge delta specs into `openspec/specs/` (source of truth)
+   - The change folder moves to `openspec/changes/archive/` with a date prefix
+   - This keeps `openspec/changes/` clean — only active work shows
 
 ## Pre-Deploy Checklist
 

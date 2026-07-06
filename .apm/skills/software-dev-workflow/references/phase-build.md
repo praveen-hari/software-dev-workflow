@@ -45,22 +45,43 @@ For each slice:
 
 ## UI Builder Routing
 
-If the current task involves building UI pages, dashboards, or forms, detect the project stack and route to the appropriate Syncfusion UI Builder:
+If the current task involves building UI pages, dashboards, or forms, detect the project stack and route to the appropriate Syncfusion UI Builder.
 
-### Auto-Detection Rules
+> **Important:** UI Builders are installed per-project to keep context lean (~60–70
+> skills each). They are NOT bundled with this workflow. If the builder is missing,
+> prompt the user to install it.
 
-| Signal | UI Builder Agent |
-|--------|-----------------|
-| `package.json` contains `"react"` | `syncfusion-react-ui-builder` |
-| `package.json` contains `"@angular/core"` | `syncfusion-angular-ui-builder` |
-| `*.csproj` contains `Blazor` SDK | `syncfusion-blazor-ui-builder` |
-| `*.csproj` contains `Maui` SDK | `syncfusion-maui-ui-builder` |
-| `*.csproj` contains `Wpf` references | `syncfusion-wpf-ui-builder` |
-| `*.csproj` contains `WindowsForms` | `syncfusion-winforms-ui-builder` |
-| `*.csproj` contains `WinUI` SDK | `syncfusion-winui-ui-builder` |
-| None of the above | Use `incremental-implementation` + `frontend-ui-engineering` |
+### Step 1 — Auto-Detect the Project Stack
 
-### UI Builder Integration Rules
+| Signal | Framework | UI Builder Package |
+|--------|-----------|---------------------|
+| `package.json` contains `"react"` | React | `syncfusion/react-ui-builder` |
+| `package.json` contains `"@angular/core"` | Angular | `syncfusion/angular-ui-builder` |
+| `*.csproj` contains `Blazor` SDK | Blazor | `syncfusion/blazor-ui-builder` |
+| `*.csproj` contains `Maui` SDK | .NET MAUI | `syncfusion/maui-ui-builder` |
+| `*.csproj` contains `Wpf` references | WPF | `syncfusion/wpf-ui-builder` |
+| `*.csproj` contains `WindowsForms` | WinForms | `syncfusion/winforms-ui-builder` |
+| `*.csproj` contains `WinUI` SDK | WinUI | `syncfusion/winui-ui-builder` |
+| None of the above | — | Use `incremental-implementation` + `frontend-ui-engineering` |
+
+### Step 2 — Check if the UI Builder Is Installed
+
+Before routing, verify the builder is available:
+
+- Look for the builder's agent file (e.g., `syncfusion-react-ui-builder.agent.md`) or skill folder
+- If **installed** → proceed to Step 3
+- If **not installed** → inform the user:
+
+```
+⚠ Detected [Framework] project but the Syncfusion UI Builder is not installed.
+  To enable Syncfusion UI generation, run:
+    apm install syncfusion/[framework]-ui-builder -t <target>
+  Falling back to incremental-implementation + frontend-ui-engineering.
+```
+
+Do NOT block the build. Fall back to `incremental-implementation` + `frontend-ui-engineering` and continue.
+
+### Step 3 — UI Builder Integration Rules
 
 When routing to a Syncfusion UI Builder:
 

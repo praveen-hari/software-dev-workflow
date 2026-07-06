@@ -22,11 +22,18 @@ dependencies:
   apm:
     # Engineering discipline — 24 production-grade skills
     - addyosmani/agent-skills
-    # Syncfusion UI Builders — framework-specific frontend generation
-    - syncfusion/react-ui-builder
-    - syncfusion/angular-ui-builder
-    - syncfusion/blazor-ui-builder
-    - syncfusion/maui-ui-builder
-    - syncfusion/wpf-ui-builder
-    - syncfusion/winforms-ui-builder
-    - syncfusion/winui-ui-builder
+    # OpenSpec — spec-driven planning layer for Define + Plan phases
+    # Install separately via: npm install -g @fission-ai/openspec@latest
+    # Then run: openspec init (in your project root)
+    # See https://openspec.dev/ for docs
+    #
+    # Syncfusion UI Builders — install ONE per project (not bundled to avoid ~500 skill context bloat)
+    # The workflow auto-detects your stack and prompts you to install the right builder.
+    # See README.md for per-framework install commands:
+    #   apm install syncfusion/react-ui-builder -t <target>
+    #   apm install syncfusion/angular-ui-builder -t <target>
+    #   apm install syncfusion/blazor-ui-builder -t <target>
+    #   apm install syncfusion/maui-ui-builder -t <target>
+    #   apm install syncfusion/wpf-ui-builder -t <target>
+    #   apm install syncfusion/winforms-ui-builder -t <target>
+    #   apm install syncfusion/winui-ui-builder -t <target>

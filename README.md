@@ -14,7 +14,7 @@ Production-grade software development workflow for AI coding agents. Orchestrate
 ## What This Package Does
 
 - **Orchestrates 24 agent-skills** through a structured 6-phase lifecycle
-- **Auto-detects project stack** and routes UI work to the correct Syncfusion UI Builder
+- **Auto-detects project stack** and routes UI work to the correct Syncfusion UI Builder (installed per-project)
 - **Enforces engineering discipline**: spec before code, TDD, code review, security hardening
 - **Provides 6 slash commands** (`/spec`, `/plan`, `/build`, `/test`, `/review`, `/ship`)
 - **Includes 4 specialist agents**: code reviewer, security auditor, test engineer, workflow orchestrator
@@ -22,24 +22,35 @@ Production-grade software development workflow for AI coding agents. Orchestrate
 
 ## Supported Frameworks (UI Generation)
 
-| Framework | UI Builder | Stack |
-|-----------|-----------|-------|
-| React | `syncfusion/react-ui-builder` | Web |
-| Angular | `syncfusion/angular-ui-builder` | Web |
-| Blazor | `syncfusion/blazor-ui-builder` | Web (.NET) |
-| .NET MAUI | `syncfusion/maui-ui-builder` | Cross-platform |
-| WPF | `syncfusion/wpf-ui-builder` | Windows Desktop |
-| WinForms | `syncfusion/winforms-ui-builder` | Windows Desktop |
-| WinUI | `syncfusion/winui-ui-builder` | Windows Desktop |
+UI Builders are installed **per-project** (not bundled) to keep context lean. Each builder adds ~60–70 component skills. Install only the one matching your project's framework.
+
+| Framework | Install Command | Stack |
+|-----------|----------------|-------|
+| React | `apm install syncfusion/react-ui-builder -t <target>` | Web |
+| Angular | `apm install syncfusion/angular-ui-builder -t <target>` | Web |
+| Blazor | `apm install syncfusion/blazor-ui-builder -t <target>` | Web (.NET) |
+| .NET MAUI | `apm install syncfusion/maui-ui-builder -t <target>` | Cross-platform |
+| WPF | `apm install syncfusion/wpf-ui-builder -t <target>` | Windows Desktop |
+| WinForms | `apm install syncfusion/winforms-ui-builder -t <target>` | Windows Desktop |
+| WinUI | `apm install syncfusion/winui-ui-builder -t <target>` | Windows Desktop |
+
+> **Why not bundle all 7?** Each UI Builder pulls ~60–70 component skills as
+> transitive dependencies. Bundling all 7 would install ~500+ skills, flooding
+> the agent's context window with irrelevant framework knowledge. A React project
+> never needs WPF skills.
 
 For non-Syncfusion stacks, the workflow uses `agent-skills` directly (incremental-implementation + frontend-ui-engineering).
 
 ## Prerequisites
 
 - [APM (Agent Package Manager)](https://microsoft.github.io/apm/getting-started/installation/#quick-install-recommended)
+- [OpenSpec](https://openspec.dev/) — spec-driven planning layer for Define + Plan phases
 - A supported AI agent or IDE (Code Studio, VS Code, Cursor, Claude Code, etc.)
+- Node.js 20.19.0+ (required by OpenSpec)
 
 ## Installation
+
+### Step 1 — Install the base workflow
 
 ```bash
 # Install for GitHub Copilot
@@ -55,9 +66,41 @@ apm install your-org/software-dev-workflow -t cursor
 apm install your-org/software-dev-workflow -t codex
 ```
 
-This automatically installs all dependencies:
+This installs:
 - ✅ 24 agent-skills (engineering workflows)
-- ✅ All 7 Syncfusion UI Builders (framework-specific frontend generation)
+- ✅ 4 specialist agents + 6 slash commands
+- ✅ Workflow orchestration skill with phase references
+
+### Step 2 — Initialize OpenSpec (for Define + Plan phases)
+
+```bash
+npm install -g @fission-ai/openspec@latest
+cd your-project
+openspec init
+```
+
+This sets up the `openspec/` directory structure and installs slash commands (`/opsx:explore`, `/opsx:propose`, `/opsx:apply`, `/opsx:archive`) into your AI tool.
+
+> **Why OpenSpec?** It provides per-feature artifact folders (`openspec/changes/<name>/`)
+> with co-located proposal, specs, design, and tasks. No more overwriting shared
+> `tasks/todo.md` files when working on multiple features.
+
+### Step 3 — Install your framework's UI Builder (optional)
+
+If your project uses Syncfusion components, install **only** the builder for your framework:
+
+```bash
+# Example: React project
+apm install syncfusion/react-ui-builder -t copilot
+
+# Example: Blazor project
+apm install syncfusion/blazor-ui-builder -t copilot
+```
+
+See the [Supported Frameworks](#supported-frameworks-ui-generation) table for all options.
+
+> **Tip:** If you skip this step, the workflow will auto-detect your stack during
+> `/build` and prompt you with the correct install command.
 
 ## Usage
 
@@ -65,12 +108,12 @@ This automatically installs all dependencies:
 
 | Command | Phase | What Happens |
 |---------|-------|-------------|
-| `/spec` | Define | Interview → Idea Refine → Write PRD specification |
-| `/plan` | Plan | Break spec into vertical slices with acceptance criteria |
-| `/build` | Build | Implement slice-by-slice with TDD + UI Builder routing |
+| `/spec` | Define | Uses OpenSpec: `/opsx:explore` → `/opsx:propose` → creates change folder with proposal, specs, design, tasks |
+| `/plan` | Plan | Refines `openspec/changes/<name>/tasks.md` with vertical slices and acceptance criteria |
+| `/build` | Build | Reads tasks from OpenSpec change folder, implements slice-by-slice with TDD + UI Builder routing |
 | `/test` | Verify | Run tests, debug failures, verify at runtime |
 | `/review` | Review | 5-axis code review + security audit + test coverage |
-| `/ship` | Ship | Git workflow → CI/CD → Deploy → Monitor |
+| `/ship` | Ship | Git workflow → CI/CD → Deploy → Monitor → then `/opsx:archive` to merge specs |
 
 ### Workflow Routes
 
@@ -78,8 +121,8 @@ Not every task needs the full lifecycle:
 
 | Task Type | Route |
 |-----------|-------|
-| New feature | `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship` |
-| Clear requirements | `/plan` → `/build` → `/test` → `/review` → `/ship` |
+| New feature | `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
+| Clear requirements | `/opsx:propose` → `/plan` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
 | Bug fix | Debug → TDD → Review → Ship |
 | Refactor | Simplify → TDD → Review → Ship |
 | Hotfix | Debug → Fix → Test → Ship (fast track) |
@@ -112,7 +155,7 @@ Each phase activates the right agent-skills automatically:
 | Ship | `git-workflow-and-versioning`, `ci-cd-and-automation`, `shipping-and-launch` |
 
 ### 3. Stack-Aware UI Routing
-During the Build phase, the workflow auto-detects the project stack and routes UI work to the correct Syncfusion UI Builder — no manual configuration needed.
+During the Build phase, the workflow auto-detects the project stack and checks if the matching Syncfusion UI Builder is installed. If installed, it routes UI work to the builder. If not, it prompts you with the install command and falls back to `agent-skills` for UI work.
 
 ## Package Structure
 

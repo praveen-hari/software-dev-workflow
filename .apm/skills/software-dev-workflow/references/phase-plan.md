@@ -1,51 +1,39 @@
-# Phase 2 — Plan
+# Phase 2 — Plan (Refine OpenSpec Tasks)
 
 ## Purpose
 
-Break the spec into small, verifiable tasks with explicit acceptance criteria. Good task breakdown is the difference between reliable delivery and a tangled mess.
+Refine the task list in the OpenSpec change folder into small, verifiable vertical slices with explicit acceptance criteria. Good task breakdown is the difference between reliable delivery and a tangled mess.
 
 ## When to Enter
 
-- Spec exists and is approved (from Phase 1)
-- Requirements are clear and the scope is defined
+- OpenSpec change folder exists at `openspec/changes/<feature-name>/`
+- Proposal and specs are approved (from Phase 1)
 - The implementation touches multiple files or components
 
-## Skill Activated
+## Workflow
 
-### `planning-and-task-breakdown`
-
-Activate the `planning-and-task-breakdown` skill. Follow these steps:
-
-### Step 1: Enter Read-Only Mode
+### Step 1: Read the OpenSpec Change
 
 Before writing any code, operate in read-only mode:
 
-- Read the spec and relevant codebase sections
+- Read `openspec/changes/<feature-name>/proposal.md` for intent and scope
+- Read `openspec/changes/<feature-name>/specs/` for behavior requirements
+- Read `openspec/changes/<feature-name>/design.md` for technical approach
+- Read relevant codebase sections
 - Identify existing patterns and conventions
-- Map dependencies between components
 - Note risks and unknowns
 
 **Do NOT write code during planning.**
 
-### Step 2: Map the Dependency Graph
+### Step 2: Refine `tasks.md`
 
-Identify what depends on what:
+OpenSpec's `/opsx:propose` already generates an initial `tasks.md`. Refine it:
 
-```
-Foundation layer (schema, types, config)
-    │
-    ├── Service layer (business logic, API)
-    │       │
-    │       └── Presentation layer (UI, CLI)
-    │
-    └── Infrastructure (migrations, seeds)
-```
-
-Implementation order follows the dependency graph bottom-up.
-
-### Step 3: Slice Vertically
-
-Build one complete feature path at a time, not horizontal layers:
+1. **Map the dependency graph** — identify what depends on what
+2. **Slice vertically** — each task delivers working, testable functionality
+3. **Add acceptance criteria** — each task must have specific, verifiable criteria
+4. **Order by dependency** — foundation first, then services, then presentation
+5. **Identify the critical path** — mark blocking vs. parallelizable tasks
 
 **Bad (horizontal):**
 ```
@@ -61,29 +49,31 @@ Task 2: User can log in (auth + API + UI)
 Task 3: User can create a task (schema + API + UI)
 ```
 
-Each vertical slice delivers working, testable functionality.
+### Step 3: Write Refined Tasks
 
-### Step 4: Write Tasks
-
-Each task must include:
+Update `openspec/changes/<feature-name>/tasks.md` with this format:
 
 ```markdown
-### Task [ID]: [Short description]
-- **Description**: What to implement
-- **Acceptance Criteria**:
-  - [ ] [Specific, verifiable criterion]
-  - [ ] [Another criterion]
-- **Dependencies**: [Task IDs this depends on]
-- **Estimated Scope**: [Small / Medium / Large]
+## 1. [Group Name]
+- [ ] 1.1 [Short description]
+  - **Acceptance Criteria**: [specific, verifiable]
+  - **Dependencies**: [task IDs]
+  - **Scope**: [Small / Medium / Large]
+- [ ] 1.2 [Short description]
+  - ...
+
+## 2. [Group Name]
+- [ ] 2.1 [Short description]
+  - ...
 ```
 
-### Step 5: Identify the Critical Path
+### Step 4: Update Design if Needed
 
-Mark which tasks are on the critical path (blocking other work) and which can be parallelized.
+If planning reveals architectural decisions, update `openspec/changes/<feature-name>/design.md`.
 
 ## User Gate
 
-Present the task list to the user for review. Confirm:
+Present the refined task list to the user for review. Confirm:
 - Task order makes sense
 - Acceptance criteria are clear
 - Scope estimates are reasonable
@@ -99,8 +89,10 @@ Present the task list to the user for review. Confirm:
 
 ## Output Artifacts
 
-- `tasks/plan.md` — Dependency graph and architecture notes
-- `tasks/todo.md` — Ordered task list with acceptance criteria
+Refined `openspec/changes/<feature-name>/tasks.md`
+
+> **Migration note:** The old `tasks/plan.md` and `tasks/todo.md` paths are deprecated.
+> All planning artifacts now live inside the OpenSpec change folder.
 
 ## Transition
 

@@ -20,13 +20,17 @@ Every task follows a subset of the 6-phase lifecycle. The skill determines which
 ## The 6-Phase Lifecycle
 
 ```
-  DEFINE          PLAN           BUILD          VERIFY         REVIEW          SHIP
- ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐
- │ Idea │ ───▶ │ Spec │ ───▶ │ Code │ ───▶ │ Test │ ───▶ │  QA  │ ───▶ │  Go  │
- │Refine│      │  PRD │      │ Impl │      │Debug │      │ Gate │      │ Live │
- └──────┘      └──────┘      └──────┘      └──────┘      └──────┘      └──────┘
+  DEFINE (OpenSpec)  PLAN (OpenSpec)    BUILD          VERIFY         REVIEW          SHIP
+ ┌────────────┐  ┌────────────┐  ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐
+ │/opsx:explore│─▶│/opsx:propose│─▶│ Code │ ───▶ │ Test │ ───▶ │  QA  │ ───▶ │  Go  │
+ │/opsx:propose│  │  (tasks.md) │  │ Impl │      │Debug │      │ Gate │      │ Live │
+ └────────────┘  └────────────┘  └──────┘      └──────┘      └──────┘      └──────┘
   /spec          /plan          /build        /test         /review       /ship
 ```
+
+> **Define + Plan** use [OpenSpec](https://openspec.dev/) for structured artifact management.
+> **Build → Ship** use agent-skills for engineering discipline (TDD, review, security, CI/CD).
+> All artifacts live in `openspec/changes/<feature-name>/` until archived.
 
 ## Task Classification & Route Selection
 
@@ -72,8 +76,8 @@ Every phase has gates. Do not advance until the exit criteria are met.
 
 | Phase | Entry Criteria | Exit Criteria |
 |-------|---------------|---------------|
-| **Define** | Task is non-trivial and requirements are unclear | Spec document approved by user |
-| **Plan** | Spec exists or requirements are clear | Task list with acceptance criteria approved |
+| **Define** | Task is non-trivial and requirements are unclear | OpenSpec change folder created, proposal + specs approved by user |
+| **Plan** | OpenSpec change exists or requirements are clear | `tasks.md` refined with acceptance criteria, approved |
 | **Build** | Tasks defined with acceptance criteria | Each slice: implemented, tested, verified |
 | **Verify** | Code is written | All tests pass, runtime behavior confirmed |
 | **Review** | Code is complete and tested | 5-axis review passed, no blocking issues |
@@ -94,33 +98,57 @@ For task-type routing (bug fix, refactor, hotfix): Read `references/workflow-rou
 
 ## Stack Detection & UI Builder Routing
 
-During the Build phase, if the task involves UI/frontend work, auto-detect the project stack and route to the correct Syncfusion UI Builder:
+> **Context budget note:** UI Builders are installed per-project, not bundled with
+> this workflow. Each builder pulls ~60–70 component skills. Installing all 7
+> frameworks would add ~500+ skills to the context — most of which are irrelevant
+> to any single project. Install only the one you need.
+
+During the Build phase, if the task involves UI/frontend work:
+
+### Step 1 — Detect the project stack
+
+| Signal | Framework | UI Builder Package |
+|--------|-----------|--------------------|
+| `package.json` contains `"react"` | React | `syncfusion/react-ui-builder` |
+| `package.json` contains `"@angular/core"` | Angular | `syncfusion/angular-ui-builder` |
+| `*.csproj` contains `Blazor` SDK | Blazor | `syncfusion/blazor-ui-builder` |
+| `*.csproj` contains `Maui` SDK | .NET MAUI | `syncfusion/maui-ui-builder` |
+| `*.csproj` contains `Wpf` references | WPF | `syncfusion/wpf-ui-builder` |
+| `*.csproj` contains `WindowsForms` | WinForms | `syncfusion/winforms-ui-builder` |
+| `*.csproj` contains `WinUI` SDK | WinUI | `syncfusion/winui-ui-builder` |
+| None of the above | — | Not applicable |
+
+### Step 2 — Check if the UI Builder is installed
+
+Look for the builder's agent file (e.g., `syncfusion-react-ui-builder.agent.md`)
+or skill folder in the installed skills directory.
 
 ```
-Detect project stack:
+UI Builder installed?
     │
-    ├── package.json + "react"           → syncfusion-react-ui-builder agent
-    ├── package.json + "@angular/core"   → syncfusion-angular-ui-builder agent
-    ├── *.csproj + "Blazor"              → syncfusion-blazor-ui-builder agent
-    ├── *.csproj + "Maui"                → syncfusion-maui-ui-builder agent
-    ├── *.csproj + "Wpf"                 → syncfusion-wpf-ui-builder agent
-    ├── *.csproj + "WindowsForms"        → syncfusion-winforms-ui-builder agent
-    ├── *.csproj + "WinUI"               → syncfusion-winui-ui-builder agent
+    ├── YES → Route to the UI Builder agent
+    │         (it runs its own 8-stage workflow: Intent → Detect → Map →
+    │          Theme → Code → Deps → Validate → Insert)
+    │
+    ├── NO  → Tell the user:
+    │         "Detected [Framework] project. To enable Syncfusion UI generation, run:
+    │          apm install syncfusion/[framework]-ui-builder -t <target>"
+    │         → Fall back to incremental-implementation + frontend-ui-engineering
     │
     └── No Syncfusion stack detected
         → Use incremental-implementation + frontend-ui-engineering skills
 ```
 
-The UI Builder handles its own 8-stage workflow (Intent → Detect → Map → Theme → Code → Deps → Validate → Insert). Our workflow wraps it with the engineering discipline from agent-skills (spec first, test after, review before merge).
+After UI Builder generation, the workflow still enforces engineering discipline:
+write tests, review code, check security, then commit.
 
 ## Skill Activation Matrix
 
-| Phase | Skills Activated | When |
-|-------|-----------------|------|
-| **Define** | `interview-me` | Requirements are vague or underspecified |
-| | `idea-refine` | Concept needs exploration before committing |
-| | `spec-driven-development` | Always for non-trivial work |
-| **Plan** | `planning-and-task-breakdown` | Always after spec is approved |
+| Phase | Skills / Tools Activated | When |
+|-------|--------------------------|------|
+| **Define** | OpenSpec `/opsx:explore` | Requirements are vague or underspecified |
+| | OpenSpec `/opsx:propose` | Always for non-trivial work — creates change folder with proposal, specs, design, tasks |
+| **Plan** | `planning-and-task-breakdown` | To refine `openspec/changes/<name>/tasks.md` after proposal is approved |
 | **Build** | `incremental-implementation` | Always — build in vertical slices |
 | | `test-driven-development` | Always — red-green-refactor per slice |
 | | `source-driven-development` | When using frameworks/libraries |
@@ -128,7 +156,7 @@ The UI Builder handles its own 8-stage workflow (Intent → Detect → Map → T
 | | `context-engineering` | When context quality drops |
 | | `frontend-ui-engineering` | UI work (non-Syncfusion or overlay) |
 | | `api-and-interface-design` | API or module boundary work |
-| | Syncfusion UI Builder | UI work on Syncfusion stack (auto-detected) |
+| | Syncfusion UI Builder | UI work on Syncfusion stack (auto-detected; install per-project) |
 | **Verify** | `debugging-and-error-recovery` | Something broke or behaves unexpectedly |
 | | `browser-testing-with-devtools` | Web frontend verification |
 | **Review** | `code-review-and-quality` | Always before merge |
