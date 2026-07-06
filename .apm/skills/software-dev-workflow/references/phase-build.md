@@ -8,6 +8,25 @@ Implement the plan slice-by-slice. Each slice is implemented, tested, verified, 
 
 - Task list exists with acceptance criteria (from Phase 2)
 - Dependencies are mapped and implementation order is clear
+- If tasks include UI work: `DESIGN.md` must exist and be approved (from Phase 2.5)
+
+### Design System Prerequisite (UI Work Only)
+
+Before implementing any UI task, check:
+
+1. Does `DESIGN.md` exist at the project root?
+2. Does `tokens.css` exist at the project root alongside it?
+3. Has the user approved the design system?
+
+If any answer is **no**, tell the user:
+```
+⚠ UI tasks found but no approved design system exists.
+  Run /design first to finalize colors, typography, and spacing tokens.
+  All UI code must use CSS variables from tokens.css — no hardcoded values.
+```
+
+Do NOT start UI implementation without an approved `DESIGN.md`.
+Backend tasks (API, database, logic) can proceed without it.
 
 ## Core Skill: `incremental-implementation`
 

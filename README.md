@@ -3,12 +3,12 @@
 Production-grade software development workflow for AI coding agents. Orchestrates a 6-phase lifecycle using [agent-skills](https://github.com/addyosmani/agent-skills) for engineering discipline and [Syncfusion UI Builders](https://www.syncfusion.com/explore/agentic-ui-builder/) for frontend generation across 7 frameworks.
 
 ```
-  DEFINE          PLAN           BUILD          VERIFY         REVIEW          SHIP
- ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐
- │ Idea │ ───▶ │ Spec │ ───▶ │ Code │ ───▶ │ Test │ ───▶ │  QA  │ ───▶ │  Go  │
- │Refine│      │  PRD │      │ Impl │      │Debug │      │ Gate │      │ Live │
- └──────┘      └──────┘      └──────┘      └──────┘      └──────┘      └──────┘
-  /spec          /plan          /build        /test         /review       /ship
+  DEFINE       PLAN        DESIGN        BUILD        VERIFY       REVIEW        SHIP
+ ┌────────┐  ┌────────┐  ┌────────┐  ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐
+ │ Explore│─▶│  Tasks │─▶│ Colors │─▶│ Code │─▶│ Test │─▶│  QA  │─▶│  Go  │
+ │Propose │  │  Plan  │  │ Tokens │  │ Impl │  │Debug │  │ Gate │  │ Live │
+ └────────┘  └────────┘  └────────┘  └──────┘  └──────┘  └──────┘  └──────┘
+  /spec       /plan       /design       /build      /test      /review     /ship
 ```
 
 ## What This Package Does
@@ -16,7 +16,7 @@ Production-grade software development workflow for AI coding agents. Orchestrate
 - **Orchestrates 24 agent-skills** through a structured 6-phase lifecycle
 - **Auto-detects project stack** and routes UI work to the correct Syncfusion UI Builder (installed per-project)
 - **Enforces engineering discipline**: spec before code, TDD, code review, security hardening
-- **Provides 6 slash commands** (`/spec`, `/plan`, `/build`, `/test`, `/review`, `/ship`)
+- **Provides 7 slash commands** (`/spec`, `/plan`, `/design`, `/build`, `/test`, `/review`, `/ship`)
 - **Includes 4 specialist agents**: code reviewer, security auditor, test engineer, workflow orchestrator
 - **Works for any tech stack** — the engineering workflow is stack-agnostic
 
@@ -110,7 +110,8 @@ See the [Supported Frameworks](#supported-frameworks-ui-generation) table for al
 |---------|-------|-------------|
 | `/spec` | Define | Uses OpenSpec: `/opsx:explore` → `/opsx:propose` → creates change folder with proposal, specs, design, tasks |
 | `/plan` | Plan | Refines `openspec/changes/<name>/tasks.md` with vertical slices and acceptance criteria |
-| `/build` | Build | Reads tasks from OpenSpec change folder, implements slice-by-slice with TDD + UI Builder routing |
+| `/design` | Design | Finalizes DESIGN.md with color palette, typography, spacing tokens + exports tokens.css. Required before UI code. |
+| `/build` | Build | Reads tasks from OpenSpec change folder, implements slice-by-slice with TDD + UI Builder routing. UI code consumes tokens.css. |
 | `/test` | Verify | Run tests, debug failures, verify at runtime |
 | `/review` | Review | 5-axis code review + security audit + test coverage |
 | `/ship` | Ship | Git workflow → CI/CD → Deploy → Monitor → then `/opsx:archive` to merge specs |
@@ -121,8 +122,9 @@ Not every task needs the full lifecycle:
 
 | Task Type | Route |
 |-----------|-------|
-| New feature | `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
-| Clear requirements | `/opsx:propose` → `/plan` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
+| New feature (with UI) | `/spec` → `/plan` → `/design` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
+| New feature (backend only) | `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
+| Clear requirements | `/opsx:propose` → `/plan` → `/design` → `/build` → `/test` → `/review` → `/ship` → `/opsx:archive` |
 | Bug fix | Debug → TDD → Review → Ship |
 | Refactor | Simplify → TDD → Review → Ship |
 | Hotfix | Debug → Fix → Test → Ship (fast track) |
@@ -147,8 +149,9 @@ Each phase activates the right agent-skills automatically:
 
 | Phase | Skills Activated |
 |-------|-----------------|
-| Define | `interview-me`, `idea-refine`, `spec-driven-development` |
+| Define | OpenSpec `/opsx:explore`, `/opsx:propose` |
 | Plan | `planning-and-task-breakdown` |
+| Design | `design-system` — colors, typography, spacing, component tokens |
 | Build | `incremental-implementation`, `test-driven-development`, `source-driven-development`, UI Builder |
 | Verify | `debugging-and-error-recovery`, `browser-testing-with-devtools` |
 | Review | `code-review-and-quality`, `security-and-hardening`, `performance-optimization` |
@@ -170,19 +173,23 @@ software-dev-workflow/
 │   │   ├── security-auditor.agent.md          #   Security audit specialist
 │   │   └── test-engineer.agent.md             #   QA specialist
 │   ├── skills/
+│   │   ├── design-system/                     # Design system skill
+│   │   │   └── SKILL.md                       #   Color, typography, spacing tokens
 │   │   └── software-dev-workflow/             # Main orchestration skill
 │   │       ├── SKILL.md                       #   Workflow definition
 │   │       └── references/                    #   Phase-specific instructions
 │   │           ├── phase-define.md
 │   │           ├── phase-plan.md
+│   │           ├── phase-design.md
 │   │           ├── phase-build.md
 │   │           ├── phase-verify.md
 │   │           ├── phase-review.md
 │   │           ├── phase-ship.md
 │   │           └── workflow-routes.md
-│   ├── prompts/                               # 6 slash commands
+│   ├── prompts/                               # 7 slash commands
 │   │   ├── spec.prompt.md                     #   /spec
 │   │   ├── plan.prompt.md                     #   /plan
+│   │   ├── design.prompt.md                   #   /design
 │   │   ├── build.prompt.md                    #   /build
 │   │   ├── test.prompt.md                     #   /test
 │   │   ├── review.prompt.md                   #   /review
@@ -196,6 +203,7 @@ software-dev-workflow/
 This workflow enforces practices from [Software Engineering at Google](https://abseil.io/resources/swe-book):
 
 - **Spec before code** — Non-trivial work without a spec is guessing
+- **Design before UI code** — Color system, typography, and spacing must be confirmed before implementation
 - **Vertical slices** — Build complete feature paths, not horizontal layers
 - **Test-driven development** — Write the failing test first
 - **~100 lines per change** — Small, reviewable increments

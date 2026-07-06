@@ -17,18 +17,19 @@ This skill orchestrates the complete software development lifecycle by routing t
 
 Every task follows a subset of the 6-phase lifecycle. The skill determines which phases apply based on task classification.
 
-## The 6-Phase Lifecycle
+## The 7-Phase Lifecycle
 
 ```
-  DEFINE (OpenSpec)  PLAN (OpenSpec)    BUILD          VERIFY         REVIEW          SHIP
- ┌────────────┐  ┌────────────┐  ┌──────┐      ┌──────┐      ┌──────┐      ┌──────┐
- │/opsx:explore│─▶│/opsx:propose│─▶│ Code │ ───▶ │ Test │ ───▶ │  QA  │ ───▶ │  Go  │
- │/opsx:propose│  │  (tasks.md) │  │ Impl │      │Debug │      │ Gate │      │ Live │
- └────────────┘  └────────────┘  └──────┘      └──────┘      └──────┘      └──────┘
-  /spec          /plan          /build        /test         /review       /ship
+  DEFINE        PLAN          DESIGN         BUILD          VERIFY        REVIEW         SHIP
+ ┌────────┐   ┌────────┐   ┌────────┐   ┌──────┐   ┌──────┐   ┌──────┐   ┌──────┐
+ │ Explore│─▶│  Tasks │─▶│ Colors │─▶│ Code │─▶│ Test │─▶│  QA  │─▶│  Go  │
+ │Propose │   │  Plan  │   │ Tokens │   │ Impl │   │Debug │   │ Gate │   │ Live │
+ └────────┘   └────────┘   └────────┘   └──────┘   └──────┘   └──────┘   └──────┘
+  /spec        /plan        /design        /build       /test       /review      /ship
 ```
 
 > **Define + Plan** use [OpenSpec](https://openspec.dev/) for structured artifact management.
+> **Design** finalizes the visual system (colors, typography, spacing) before any UI code.
 > **Build → Ship** use agent-skills for engineering discipline (TDD, review, security, CI/CD).
 > All artifacts live in `openspec/changes/<feature-name>/` until archived.
 
@@ -78,7 +79,8 @@ Every phase has gates. Do not advance until the exit criteria are met.
 |-------|---------------|---------------|
 | **Define** | Task is non-trivial and requirements are unclear | OpenSpec change folder created, proposal + specs approved by user |
 | **Plan** | OpenSpec change exists or requirements are clear | `tasks.md` refined with acceptance criteria, approved |
-| **Build** | Tasks defined with acceptance criteria | Each slice: implemented, tested, verified |
+| **Design** | Tasks include UI work and no `DESIGN.md` exists | `DESIGN.md` + `tokens.css` created and approved by user |
+| **Build** | Tasks defined with acceptance criteria; `DESIGN.md` approved (if UI work) | Each slice: implemented, tested, verified |
 | **Verify** | Code is written | All tests pass, runtime behavior confirmed |
 | **Review** | Code is complete and tested | 5-axis review passed, no blocking issues |
 | **Ship** | Review approved | Deployed, monitored, documented |
@@ -89,6 +91,7 @@ Each phase has a dedicated reference file with full instructions:
 
 - **Phase 1 — Define**: Read `references/phase-define.md`
 - **Phase 2 — Plan**: Read `references/phase-plan.md`
+- **Phase 2.5 — Design**: Read `references/phase-design.md`
 - **Phase 3 — Build**: Read `references/phase-build.md`
 - **Phase 4 — Verify**: Read `references/phase-verify.md`
 - **Phase 5 — Review**: Read `references/phase-review.md`
@@ -149,6 +152,7 @@ write tests, review code, check security, then commit.
 | **Define** | OpenSpec `/opsx:explore` | Requirements are vague or underspecified |
 | | OpenSpec `/opsx:propose` | Always for non-trivial work — creates change folder with proposal, specs, design, tasks |
 | **Plan** | `planning-and-task-breakdown` | To refine `openspec/changes/<name>/tasks.md` after proposal is approved |
+| **Design** | `design-system` | When tasks include UI work and no `DESIGN.md` exists — creates color palette, typography, spacing tokens |
 | **Build** | `incremental-implementation` | Always — build in vertical slices |
 | | `test-driven-development` | Always — red-green-refactor per slice |
 | | `source-driven-development` | When using frameworks/libraries |

@@ -15,11 +15,13 @@ These rules apply to ALL work in this project. They are non-negotiable.
 
 Before starting any work, classify the task:
 
-- **New feature / project** → Full lifecycle: `/spec` → `/plan` → `/build` → `/test` → `/review` → `/ship`
+- **New feature / project** → Full lifecycle: `/spec` → `/plan` → `/design` → `/build` → `/test` → `/review` → `/ship`
   - `/spec` uses OpenSpec (`/opsx:explore` → `/opsx:propose`) to create a change folder
   - `/plan` refines `openspec/changes/<name>/tasks.md`
-  - `/build` reads tasks from the OpenSpec change folder
+  - `/design` finalizes DESIGN.md with color system, typography, spacing tokens (required before UI code)
+  - `/build` reads tasks from the OpenSpec change folder, consumes tokens.css for all UI work
 - **Feature with clear requirements** → Start at `/plan` (or `/opsx:propose` directly)
+- **UI-only change** → `/design` → `/build` → `/test` → `/review` → `/ship`
 - **Bug fix** → `debugging-and-error-recovery` → TDD → review → ship
 - **Refactor** → `code-simplification` → TDD → review → ship
 - **Hotfix** → Debug → fix → test → ship (fast track)
@@ -39,6 +41,15 @@ openspec/changes/<feature-name>/
 
 When a feature ships, run `/opsx:archive` to merge delta specs into `openspec/specs/`
 and move the change folder to `openspec/changes/archive/`.
+
+## Design System Rules (UI Work)
+
+When the project involves frontend UI:
+
+- **Design before UI code** — `DESIGN.md` must be approved before any UI implementation
+- **No hardcoded values** — All colors, fonts, spacing, and radii must use CSS variables from `tokens.css`
+- **Accent = interactive only** — The accent color is reserved for buttons, links, focus rings, and toggles
+- **WCAG contrast required** — Text on background ≥ 4.5:1, interactive elements ≥ 3:1
 
 ## Non-Negotiable Rules
 
