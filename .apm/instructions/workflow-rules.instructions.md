@@ -26,8 +26,10 @@ OpenSpec is the orchestrator. Use it for non-trivial work:
 5. **Verify at runtime** — "seems right" is never sufficient
 6. **Stay in scope** — touch only what you're asked to touch
 
-## UI Work
+## UI Work (Non-Negotiable)
 
-- If `DESIGN.md` doesn't exist, activate `design-system` skill before writing UI code
-- All UI code uses `tokens.css` variables — no hardcoded colors, fonts, or spacing
-- If a Syncfusion UI Builder is installed for the project's stack, use it for page/form generation
+Before ANY UI implementation, complete these checks in order:
+
+1. **Design system** — if `DESIGN.md` doesn't exist → STOP. Activate `design-system` skill first.
+2. **UI Builder** — if project stack matches (React/Angular/Blazor/MAUI/WPF/WinForms/WinUI) → check if Syncfusion UI Builder is installed. If not → STOP and suggest `apm install syncfusion/<framework>-ui-builder -t <target>`. If installed → MUST use it for page/dashboard/form generation.
+3. **Tokens only** — all UI code uses `tokens.css` variables. No hardcoded colors, fonts, or spacing.

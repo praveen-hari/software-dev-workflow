@@ -56,14 +56,14 @@ When `openspec-apply-change` is running and implementing tasks, layer these skil
 - `code-review-and-quality` — before merge, always
 - `git-workflow-and-versioning` — atomic commits on ship
 
-## UI Builder Routing
+## UI Builder Routing (Required Gate)
 
-During apply, if a task involves UI/frontend work:
+Before implementing ANY UI task, run this check. Do not skip it.
 
 1. **Detect stack** from `package.json` or `*.csproj`
 2. **Check if Syncfusion UI Builder is installed** (look for the agent file or skill folder)
-3. **If installed** → activate the UI Builder agent for page/dashboard/form generation
-4. **If not installed** → suggest: `apm install syncfusion/<framework>-ui-builder -t <target>`
+3. **If installed** → MUST activate the UI Builder agent for page/dashboard/form generation. Do not write UI manually.
+4. **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-builder -t <target>`. Only proceed manually if the user explicitly declines.
 5. **If no Syncfusion stack** → use `frontend-ui-engineering` skill
 
 | Signal | Framework | Package |
