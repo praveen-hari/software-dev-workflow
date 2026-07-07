@@ -6,7 +6,7 @@ description: >
   This skill layers engineering discipline on top during implementation.
   Use when building features, fixing bugs, or starting a new project.
   Use when you need to route a task to the right OpenSpec skill or enforce
-  TDD, code review, design system, or UI Builder checks.
+  TDD, code review, design system, or Syncfusion component skill checks.
 ---
 
 # Software Development Workflow
@@ -65,20 +65,20 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
   - If YES → `tokens.css` must also exist. All UI code MUST use its CSS variables. No hardcoded colors, fonts, spacing, or radii.
 - If NO UI work → skip this gate.
 
-### Gate 3 — UI Builder (UI work only)
+### Gate 3 — Syncfusion component skills (UI work only)
 
-- Does the task involve building pages, dashboards, or forms?
-- If YES → detect stack from `package.json` or `*.csproj`:
+- Does the task involve building UI components (grids, charts, forms, schedulers, etc.)?
+- If YES → check if Syncfusion component skills are installed for the project's stack:
 
-  | Signal | Framework | Package |
-  |--------|-----------|---------|
-  | `"react"` in package.json | React | `syncfusion/react-ui-builder` |
-  | `"@angular/core"` in package.json | Angular | `syncfusion/angular-ui-builder` |
-  | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-builder` |
-  | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-builder` |
+  | Signal | Framework | Skills Package |
+  |--------|-----------|---------------|
+  | `"react"` in package.json | React | `syncfusion/react-ui-components-skills` |
+  | `"@angular/core"` in package.json | Angular | `syncfusion/angular-ui-components-skills` |
+  | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-components-skills` |
+  | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-components-skills` |
 
-  - **If Syncfusion UI Builder is installed** → MUST activate it. Do not write UI manually.
-  - **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-builder -t <target>`. Only proceed manually if the user explicitly declines.
+  - **If Syncfusion component skills are installed** → MUST use them for component generation. They provide correct API usage, imports, and setup.
+  - **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-components-skills -t <target>`. Only proceed without them if the user explicitly declines.
   - **If no Syncfusion stack** → build UI manually with standard frontend practices.
 - If NO UI work → skip this gate.
 

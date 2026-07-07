@@ -18,7 +18,7 @@ Lightweight development workflow for AI coding agents. Uses [OpenSpec](https://o
 
 - **OpenSpec handles the lifecycle** — explore, propose, apply, sync, archive
 - **This package adds engineering discipline** — TDD, incremental delivery, code review, atomic commits
-- **Auto-detects project stack** and routes UI work to Syncfusion UI Builders (installed per-project)
+- **Auto-detects project stack** and routes UI work to Syncfusion component skills (installed per-project)
 - **Works for any tech stack** — the engineering rules are stack-agnostic
 
 ## Prerequisites
@@ -40,29 +40,26 @@ openspec init --tools github-copilot
 ```
 
 This installs:
-- ✅ Workflow skill with 7 enforcement gates (spec, design system, UI Builder, TDD, incremental slices, code review, atomic commits)
+- ✅ Workflow skill with 7 enforcement gates (spec, design system, Syncfusion skills, TDD, incremental slices, code review, atomic commits)
 - ✅ Design system skill for color palette, typography, and spacing tokens
 - ✅ Always-on rules (TDD, review before merge, incremental delivery)
 
-### Optional: Syncfusion UI Builder
+### Optional: Syncfusion Component Skills
 
-If your project uses Syncfusion components, install the builder for your framework:
+If your project uses Syncfusion components, install the skills for your framework:
 
 ```bash
-apm install syncfusion/react-ui-builder -t copilot
+apm install syncfusion/react-ui-components-skills -t copilot
 ```
 
 | Framework | Package |
-|-----------|---------|
-| React | `syncfusion/react-ui-builder` |
-| Angular | `syncfusion/angular-ui-builder` |
-| Blazor | `syncfusion/blazor-ui-builder` |
-| .NET MAUI | `syncfusion/maui-ui-builder` |
-| WPF | `syncfusion/wpf-ui-builder` |
-| WinForms | `syncfusion/winforms-ui-builder` |
-| WinUI | `syncfusion/winui-ui-builder` |
+|-----------|--------|
+| React | `syncfusion/react-ui-components-skills` |
+| Angular | `syncfusion/angular-ui-components-skills` |
+| Blazor | `syncfusion/blazor-ui-components-skills` |
+| .NET MAUI | `syncfusion/maui-ui-components-skills` |
 
-> Install only one. Each pulls ~60–70 component skills. Bundling all 7 would flood the context window.
+> Install only one. Each adds ~60 component skills. The agent uses them directly — no orchestrator needed.
 
 ## Usage
 
@@ -96,7 +93,7 @@ During `/opsx:apply`, the workflow enforces:
 
 For UI work:
 - `design-system` skill creates `DESIGN.md` + `tokens.css` before any UI code
-- Syncfusion UI Builder is activated when installed
+- Syncfusion component skills are used directly when installed (correct APIs, imports, setup)
 - All UI code uses CSS variables from `tokens.css`
 
 ## Package Structure
