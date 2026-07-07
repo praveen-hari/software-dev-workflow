@@ -110,75 +110,9 @@ Write `DESIGN.md` at the **project root** — it is a project-level design syste
 
 ### DESIGN.md Format
 
+Read [references/design-md-spec.md](references/design-md-spec.md) for the full DESIGN.md format specification (based on the [Stitch DESIGN.md spec](https://github.com/google-labs-code/design.md)).
+
 The file has two parts: **YAML front matter** (machine-readable tokens) + **Markdown body** (human-readable summary).
-
-```yaml
----
-version: alpha
-name: "[Project Name] Design System"
-description: "One-line description of the visual direction"
-
-colors:
-  primary: "#1A1C1E"
-  secondary: "#6C7278"
-  accent: "#2563EB"
-  background: "#FFFFFF"
-  surface: "#F8FAFC"
-  border: "#E2E8F0"
-  success: "#16A34A"
-  warning: "#EAB308"
-  error: "#DC2626"
-
-colors-dark:                    # Only if dark mode requested
-  primary: "#E8EAED"
-  secondary: "#9AA0A6"
-  accent: "#60A5FA"
-  background: "#121212"
-  surface: "#1E1E1E"
-  border: "#333333"
-  success: "#4ADE80"
-  warning: "#FACC15"
-  error: "#F87171"
-
-typography:
-  h1: { fontFamily: "Inter", fontSize: "48px", fontWeight: 700, lineHeight: 1.1 }
-  h2: { fontFamily: "Inter", fontSize: "36px", fontWeight: 600, lineHeight: 1.2 }
-  h3: { fontFamily: "Inter", fontSize: "24px", fontWeight: 600, lineHeight: 1.3 }
-  body: { fontFamily: "Inter", fontSize: "16px", fontWeight: 400, lineHeight: 1.6 }
-  small: { fontFamily: "Inter", fontSize: "14px", fontWeight: 400, lineHeight: 1.5 }
-  caption: { fontFamily: "Inter", fontSize: "12px", fontWeight: 500, lineHeight: 1.4 }
-
-spacing:
-  xs: "4px"
-  sm: "8px"
-  md: "16px"
-  lg: "24px"
-  xl: "32px"
-
-rounded:
-  sm: "4px"
-  md: "8px"
-  lg: "12px"
-  full: "9999px"
-
-components:
-  button:
-    backgroundColor: "{colors.accent}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.md}"
-    padding: "10px 20px"
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.primary}"
-    rounded: "{rounded.lg}"
-    padding: "24px"
-  input:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.primary}"
-    rounded: "{rounded.md}"
-    padding: "10px 14px"
----
-```
 
 ### Markdown Body (keep concise)
 
