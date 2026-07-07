@@ -60,6 +60,7 @@ npx skills add syncfusion/react-ui-components-skills -y
 | Vue | `npx skills add syncfusion/vue-ui-components-skills -y` |
 | Blazor | `npx skills add syncfusion/blazor-ui-components-skills -y` |
 | WPF | `npx skills add syncfusion/wpf-ui-components-skills -y` |
+| WinForms | `npx skills add syncfusion/winforms-ui-components-skills -y` |
 | ASP.NET Core | `npx skills add syncfusion/aspnetcore-ui-components-skills -y` |
 | JavaScript | `npx skills add syncfusion/javascript-ui-controls-skills -y` |
 

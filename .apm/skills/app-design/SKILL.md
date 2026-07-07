@@ -124,6 +124,7 @@ npx skills add syncfusion/<framework>-ui-components-skills -y
 | JavaScript | `syncfusion-javascript-themes` |
 | ASP.NET Core | `syncfusion-aspnetcore-themes` |
 | WPF | `syncfusion-wpf-themes` |
+| WinForms | `syncfusion-winforms-themes` |
 
 The themes skill provides:
 - How to integrate `tokens.css` with Syncfusion's theming system for that framework
