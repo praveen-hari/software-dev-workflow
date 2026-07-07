@@ -11,6 +11,12 @@ description: >
 
 OpenSpec is the orchestrator. This skill adds engineering discipline during implementation.
 
+## Prerequisites
+
+- **OpenSpec CLI** must be installed (`npm install -g @fission-ai/openspec@latest`)
+- **OpenSpec must be initialized** in the project (`openspec init`) — this creates the `openspec/` directory and installs the OpenSpec skills (`openspec-explore`, `openspec-propose`, `openspec-apply-change`, `openspec-sync-specs`, `openspec-archive-change`)
+- Those skills contain the detailed CLI instructions. This skill just routes to them.
+
 ## How It Works
 
 ```
@@ -67,9 +73,14 @@ During apply, if a task involves UI/frontend work:
 | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-builder` |
 | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-builder` |
 
-## Design System
+## Design System (Required for UI Work)
 
-If tasks include UI work and no `DESIGN.md` exists at the project root, activate the `design-system` skill to create color palette, typography, and spacing tokens **before** writing UI code. All UI code should consume `tokens.css`.
+Before writing **any** UI code, check for `DESIGN.md` at the project root.
+
+- **If `DESIGN.md` does not exist** → STOP. Activate the `design-system` skill first. Do not write UI code without it.
+- **If `DESIGN.md` exists** → all UI code MUST use CSS variables from `tokens.css`. No hardcoded colors, fonts, spacing, or radii.
+
+The `design-system` skill creates both `DESIGN.md` (token definitions) and `tokens.css` (CSS custom properties). Never create these files manually — always use the skill.
 
 ## Behaviors
 
