@@ -113,10 +113,22 @@ npx skills add syncfusion/<framework>-ui-components-skills -y
 
 ### Step 2 — Configure theming
 
-**⚠️ MANDATORY:** After confirming the framework, consult the Syncfusion themes skill (e.g., `syncfusion-react-themes`) for detailed implementation guidance. This skill provides:
-- How to integrate `tokens.css` with Syncfusion's theming system
+**⚠️ MANDATORY:** After confirming the framework, consult the matching Syncfusion themes skill for detailed implementation guidance:
+
+| Framework | Themes Skill |
+|-----------|-------------|
+| React | `syncfusion-react-themes` |
+| Angular | `syncfusion-angular-themes` |
+| Vue | `syncfusion-vue-themes` |
+| Blazor | `syncfusion-blazor-themes` |
+| JavaScript | `syncfusion-javascript-themes` |
+| ASP.NET Core | `syncfusion-aspnetcore-themes` |
+| WPF | `syncfusion-wpf-themes` |
+
+The themes skill provides:
+- How to integrate `tokens.css` with Syncfusion's theming system for that framework
 - Correct CSS variable mapping between design tokens and Syncfusion theme variables
-- Theme registration and configuration for the chosen framework
+- Theme registration and configuration specific to the framework
 
 Do not skip this step — incorrect theming leads to visual inconsistencies between custom UI and Syncfusion components.
 
