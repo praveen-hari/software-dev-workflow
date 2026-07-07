@@ -74,11 +74,14 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
   |--------|-----------|---------------|
   | `"react"` in package.json | React | `syncfusion/react-ui-components-skills` |
   | `"@angular/core"` in package.json | Angular | `syncfusion/angular-ui-components-skills` |
+  | `"vue"` in package.json | Vue | `syncfusion/vue-ui-components-skills` |
   | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-components-skills` |
-  | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-components-skills` |
+  | `Wpf` in *.csproj | WPF | `syncfusion/wpf-ui-components-skills` |
+  | ASP.NET Core project | ASP.NET Core | `syncfusion/aspnetcore-ui-components-skills` |
+  | Plain JS / no framework | JavaScript | `syncfusion/javascript-ui-controls-skills` |
 
   - **If Syncfusion component skills are installed** → MUST use them for component generation. They provide correct API usage, imports, and setup.
-  - **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-components-skills -t <target>`. Only proceed without them if the user explicitly declines.
+  - **If not installed** → STOP. Tell the user: `npx skills add syncfusion/<framework>-ui-components-skills -y`. Only proceed without them if the user explicitly declines.
   - **If no Syncfusion stack** → build UI manually with standard frontend practices.
 - If NO UI work → skip this gate.
 

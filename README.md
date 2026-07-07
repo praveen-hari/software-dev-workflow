@@ -49,17 +49,20 @@ This installs:
 If your project uses Syncfusion components, install the skills for your framework:
 
 ```bash
-apm install syncfusion/react-ui-components-skills -t copilot
+npx skills add syncfusion/react-ui-components-skills -y
 ```
 
-| Framework | Package |
-|-----------|--------|
-| React | `syncfusion/react-ui-components-skills` |
-| Angular | `syncfusion/angular-ui-components-skills` |
-| Blazor | `syncfusion/blazor-ui-components-skills` |
-| .NET MAUI | `syncfusion/maui-ui-components-skills` |
+| Framework | Install Command |
+|-----------|----------------|
+| React | `npx skills add syncfusion/react-ui-components-skills -y` |
+| Angular | `npx skills add syncfusion/angular-ui-components-skills -y` |
+| Vue | `npx skills add syncfusion/vue-ui-components-skills -y` |
+| Blazor | `npx skills add syncfusion/blazor-ui-components-skills -y` |
+| WPF | `npx skills add syncfusion/wpf-ui-components-skills -y` |
+| ASP.NET Core | `npx skills add syncfusion/aspnetcore-ui-components-skills -y` |
+| JavaScript | `npx skills add syncfusion/javascript-ui-controls-skills -y` |
 
-> Install only one. Each adds ~60 component skills. The agent uses them directly — no orchestrator needed.
+> Install only the one matching your stack. Each adds ~60 component skills. The agent uses them directly.
 
 ## Usage
 

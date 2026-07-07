@@ -31,5 +31,5 @@ OpenSpec is the orchestrator. Use it for non-trivial work:
 Before ANY UI implementation, complete these checks in order:
 
 1. **Design system** — if `DESIGN.md` doesn't exist → STOP. Activate `design-system` skill first.
-2. **Syncfusion skills** — if project stack matches (React/Angular/Blazor/MAUI) → check if Syncfusion component skills are installed. If not → STOP and suggest `apm install syncfusion/<framework>-ui-components-skills -t <target>`. If installed → MUST use them for component generation.
+2. **Syncfusion skills** — if project stack matches (React/Angular/Vue/Blazor/WPF/ASP.NET Core/JS) → check if Syncfusion component skills are installed. If not → STOP and suggest `npx skills add syncfusion/<framework>-ui-components-skills -y`. If installed → MUST use them for component generation.
 3. **Tokens only** — all UI code uses `tokens.css` variables. No hardcoded colors, fonts, or spacing.
