@@ -124,7 +124,7 @@ npx skills add syncfusion/<framework>-ui-components-skills -y
 | JavaScript | `syncfusion-javascript-themes` |
 | ASP.NET Core | `syncfusion-aspnetcore-theme` |
 | WPF | `syncfusion-wpf-themes` |
-| WinForms | `syncfusion-winforms-themes` |
+| WinForms | `syncfusion-winforms-theming` |
 | .NET MAUI | `syncfusion-maui-theming` |
 
 The themes skill provides:
