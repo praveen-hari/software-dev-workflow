@@ -1,6 +1,6 @@
 # Software Development Workflow
 
-Lightweight development workflow for AI coding agents. Uses [OpenSpec](https://openspec.dev/) as the orchestrator and [agent-skills](https://github.com/addyosmani/agent-skills) for engineering discipline.
+Lightweight development workflow for AI coding agents. Uses [OpenSpec](https://openspec.dev/) as the orchestrator with built-in engineering discipline gates.
 
 ```
   THINK              PLAN               BUILD + SHIP
@@ -111,7 +111,9 @@ software-dev-workflow/
     │   ├── app-design/                        # Full app design → production code
     │   │   └── SKILL.md
     │   ├── design-system/                     # Design tokens skill
-    │   │   └── SKILL.md
+    │   │   ├── SKILL.md
+    │   │   └── references/
+    │   │       └── design-md-spec.md           # DESIGN.md format spec
     │   └── software-dev-workflow/             # OpenSpec router + engineering gates
     │       └── SKILL.md
     └── instructions/
