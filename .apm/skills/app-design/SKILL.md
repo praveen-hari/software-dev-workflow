@@ -21,12 +21,18 @@ Stage 1: UNDERSTAND  →  Stage 2: PLAN  →  Stage 3: DESIGN  →  Stage 4: BUI
 (Requirements)          (Architecture)     (Design System)     (Production Code)
 ```
 
-Pause after each stage for user confirmation. Do not skip stages.
+**⚠️ ONE STAGE AT A TIME.** Complete one stage, show the output, and STOP. Wait for the user to review and approve before moving to the next stage. Do NOT chain stages autonomously.
 
-If the project already has artifacts, skip completed stages:
-- OpenSpec change with proposal → skip Stage 1
-- `APP_ARCHITECTURE.md` exists → skip Stage 1–2
-- `DESIGN.md` exists → skip Stage 1–3
+After completing a stage, tell the user what was done and what comes next:
+```
+✅ Stage [N] complete: [what was created]
+→ Next: Stage [N+1] — [description]. Ready to proceed?
+```
+
+**Resume from where you left off.** Check what artifacts exist:
+- OpenSpec change with proposal → start at Stage 2
+- `APP_ARCHITECTURE.md` exists → start at Stage 3
+- `DESIGN.md` exists → start at Stage 4
 - Source files exist → go to iteration
 
 ## Brownfield Projects (Existing Codebase)
@@ -66,7 +72,11 @@ Gather requirements through conversation. Ask **one or two questions at a time**
 
 **⚠️ MANDATORY:** Create the OpenSpec change via `openspec-propose` with the gathered requirements. This produces `proposal.md`, `design.md`, and `tasks.md` in the change folder. Do NOT skip this step — do not jump to design or build without a proposal.
 
-Confirm with user before proceeding.
+**✅ STOP HERE.** Show the proposal summary and wait:
+```
+✅ Stage 1 complete: OpenSpec change created with proposal, specs, and tasks.
+→ Next: Stage 2 — Plan screen architecture. Ready to proceed?
+```
 
 ---
 
@@ -105,7 +115,11 @@ Create `APP_ARCHITECTURE.md` in the project with:
 - Key user journeys (screen → screen → screen)
 - Priority: P0 (core, 4–8 screens), P1 (important, 3–6), P2 (nice-to-have)
 
-Confirm with user before proceeding.
+**✅ STOP HERE.** Show the architecture summary and wait:
+```
+✅ Stage 2 complete: APP_ARCHITECTURE.md created with [N] screens ([N] P0, [N] P1, [N] P2).
+→ Next: Stage 3 — Create design system (DESIGN.md + tokens.css). Ready to proceed?
+```
 
 ---
 
@@ -114,6 +128,12 @@ Confirm with user before proceeding.
 Activate the `design-system` skill. It creates `DESIGN.md` + `tokens.css`.
 
 The design system must be approved before any code is written.
+
+**✅ STOP HERE.** Show the design summary and wait:
+```
+✅ Stage 3 complete: DESIGN.md + tokens.css created.
+→ Next: Stage 4 — Build production code. Ready to proceed?
+```
 
 ---
 
