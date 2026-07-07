@@ -4,7 +4,9 @@ description: >
   Lightweight development workflow that uses OpenSpec as the orchestrator.
   OpenSpec handles the lifecycle (explore → propose → apply → sync → archive).
   This skill layers engineering discipline on top during implementation.
-  Use when starting a new project, building features, or shipping to production.
+  Use when building features, fixing bugs, or starting a new project.
+  Use when you need to route a task to the right OpenSpec skill or enforce
+  TDD, code review, design system, or UI Builder checks.
 ---
 
 # Software Development Workflow
@@ -45,42 +47,60 @@ When a task arrives, route based on what exists:
 | Implementation done | → `openspec-sync-specs` then `openspec-archive-change` |
 | Trivial change (single file, obvious fix) | → Just do it. No ceremony needed. |
 
-## Engineering Skills During Apply
+## Gates (Run in Order Before Implementation)
 
-When `openspec-apply-change` is running and implementing tasks, layer these skills based on what the task touches:
+Before writing any code, run through these gates top-to-bottom. Each gate must pass before moving to the next. Do not skip any.
 
-### Enforce These
+### Gate 1 — Spec exists (non-trivial work only)
 
-- `incremental-implementation` — build in vertical slices, not horizontal layers
-- `test-driven-development` — red-green-refactor per slice
-- `code-review-and-quality` — before merge, always
-- `git-workflow-and-versioning` — atomic commits on ship
+- Does an OpenSpec change exist for this work? (`openspec list --json`)
+- If NO and the work is non-trivial → STOP. Run `openspec-propose` first.
+- If YES or work is trivial → proceed.
 
-## UI Builder Routing (Required Gate)
+### Gate 2 — Design system (UI work only)
 
-Before implementing ANY UI task, run this check. Do not skip it.
+- Does the task involve UI/frontend code?
+- If YES → does `DESIGN.md` exist at the project root?
+  - If NO → STOP. Activate the `design-system` skill. Do not write UI code without it.
+  - If YES → `tokens.css` must also exist. All UI code MUST use its CSS variables. No hardcoded colors, fonts, spacing, or radii.
+- If NO UI work → skip this gate.
 
-1. **Detect stack** from `package.json` or `*.csproj`
-2. **Check if Syncfusion UI Builder is installed** (look for the agent file or skill folder)
-3. **If installed** → MUST activate the UI Builder agent for page/dashboard/form generation. Do not write UI manually.
-4. **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-builder -t <target>`. Only proceed manually if the user explicitly declines.
-5. **If no Syncfusion stack** → use `frontend-ui-engineering` skill
+### Gate 3 — UI Builder (UI work only)
 
-| Signal | Framework | Package |
-|--------|-----------|---------|
-| `"react"` in package.json | React | `syncfusion/react-ui-builder` |
-| `"@angular/core"` in package.json | Angular | `syncfusion/angular-ui-builder` |
-| `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-builder` |
-| `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-builder` |
+- Does the task involve building pages, dashboards, or forms?
+- If YES → detect stack from `package.json` or `*.csproj`:
 
-## Design System (Required for UI Work)
+  | Signal | Framework | Package |
+  |--------|-----------|---------|
+  | `"react"` in package.json | React | `syncfusion/react-ui-builder` |
+  | `"@angular/core"` in package.json | Angular | `syncfusion/angular-ui-builder` |
+  | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-builder` |
+  | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-builder` |
 
-Before writing **any** UI code, check for `DESIGN.md` at the project root.
+  - **If Syncfusion UI Builder is installed** → MUST activate it. Do not write UI manually.
+  - **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-builder -t <target>`. Only proceed manually if the user explicitly declines.
+  - **If no Syncfusion stack** → use `frontend-ui-engineering` skill.
+- If NO UI work → skip this gate.
 
-- **If `DESIGN.md` does not exist** → STOP. Activate the `design-system` skill first. Do not write UI code without it.
-- **If `DESIGN.md` exists** → all UI code MUST use CSS variables from `tokens.css`. No hardcoded colors, fonts, spacing, or radii.
+### Gate 4 — TDD (always)
 
-The `design-system` skill creates both `DESIGN.md` (token definitions) and `tokens.css` (CSS custom properties). Never create these files manually — always use the skill.
+- Every code change gets a failing test first, then implementation to make it pass.
+- Use `test-driven-development` skill. No exceptions.
+
+### Gate 5 — Incremental slices (always)
+
+- Build in vertical slices, not horizontal layers.
+- Use `incremental-implementation` skill. Each slice is a working, testable unit.
+
+### Gate 6 — Code review (before merge)
+
+- Every change gets reviewed before merge. No exceptions.
+- Use `code-review-and-quality` skill.
+
+### Gate 7 — Atomic commits (on ship)
+
+- Clean, atomic commits with descriptive messages.
+- Use `git-workflow-and-versioning` skill.
 
 ## Behaviors
 
@@ -89,4 +109,3 @@ The `design-system` skill creates both `DESIGN.md` (token definitions) and `toke
 - Prefer the boring, obvious solution
 - Stay in scope — no unsolicited renovation
 - Verify at runtime — "seems right" is never sufficient
-- Verify at runtime, don't assume
