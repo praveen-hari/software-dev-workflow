@@ -1,13 +1,10 @@
 name: software-dev-workflow
-version: 1.0.0
+version: 2.0.0
 description: >
-  Production-grade software development workflow that orchestrates a 6-phase
-  lifecycle (Define → Plan → Build → Verify → Review → Ship) for any tech stack.
-  Combines 24 engineering skills from agent-skills with Syncfusion UI Builders
-  for React, Angular, Blazor, .NET MAUI, WPF, WinForms, and WinUI.
-  Use when starting a new project, building features, fixing bugs, or shipping
-  to production. Enforces spec-driven development, test-driven development,
-  code review, security hardening, and incremental delivery.
+  Lightweight development workflow that uses OpenSpec as the orchestrator.
+  Layers engineering discipline (TDD, code review, incremental delivery)
+  on top of OpenSpec's lifecycle. Routes UI work to Syncfusion UI Builders.
+  Use when building features, fixing bugs, or starting a new project.
 author: Syncfusion Inc
 targets:
   - copilot
@@ -18,22 +15,7 @@ targets:
   - windsurf
   - kiro
   - opencode
-dependencies:
-  apm:
-    # Engineering discipline — 24 production-grade skills
-    - addyosmani/agent-skills
-    # OpenSpec — spec-driven planning layer for Define + Plan phases
-    # Install separately via: npm install -g @fission-ai/openspec@latest
-    # Then run: openspec init (in your project root)
-    # See https://openspec.dev/ for docs
-    #
-    # Syncfusion UI Builders — install ONE per project (not bundled to avoid ~500 skill context bloat)
-    # The workflow auto-detects your stack and prompts you to install the right builder.
-    # See README.md for per-framework install commands:
-    #   apm install syncfusion/react-ui-builder -t <target>
-    #   apm install syncfusion/angular-ui-builder -t <target>
-    #   apm install syncfusion/blazor-ui-builder -t <target>
-    #   apm install syncfusion/maui-ui-builder -t <target>
-    #   apm install syncfusion/wpf-ui-builder -t <target>
-    #   apm install syncfusion/winforms-ui-builder -t <target>
-    #   apm install syncfusion/winui-ui-builder -t <target>
+
+# No apm dependencies — this package is self-contained.
+# OpenSpec: install separately via npm install -g @fission-ai/openspec@latest
+# Syncfusion UI Builders: install ONE per project, see README.md

@@ -40,8 +40,8 @@ openspec init --tools github-copilot
 ```
 
 This installs:
-- ✅ 24 agent-skills (engineering discipline)
-- ✅ Workflow skill that wires OpenSpec to agent-skills
+- ✅ Workflow skill with 7 enforcement gates (spec, design system, UI Builder, TDD, incremental slices, code review, atomic commits)
+- ✅ Design system skill for color palette, typography, and spacing tokens
 - ✅ Always-on rules (TDD, review before merge, incremental delivery)
 
 ### Optional: Syncfusion UI Builder
