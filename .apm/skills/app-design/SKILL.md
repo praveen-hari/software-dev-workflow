@@ -29,6 +29,24 @@ If the project already has artifacts, skip completed stages:
 - `DESIGN.md` exists → skip Stage 1–3
 - Source files exist → go to iteration
 
+## Brownfield Projects (Existing Codebase)
+
+If the project already has source code, screens, or components:
+
+1. **Analyze first** — before planning or building, read the existing codebase to understand:
+   - Folder structure and file naming conventions
+   - Component library in use (Syncfusion, Material UI, Ant Design, custom, etc.)
+   - State management pattern (Redux, Zustand, NgRx, Vuex, etc.)
+   - Routing setup and navigation pattern
+   - Existing CSS approach (CSS modules, Tailwind, styled-components, SCSS, etc.)
+   - Test framework and patterns
+
+2. **Extract design** — if no `DESIGN.md` exists but the project has established styles, use the `design-system` skill to extract tokens from existing CSS/components into `DESIGN.md`.
+
+3. **Match patterns** — all new code MUST follow the existing project's conventions. Do not introduce new patterns, libraries, or folder structures unless the user explicitly asks.
+
+4. **Map existing screens** — if adding to an existing app, create `APP_ARCHITECTURE.md` that documents both existing screens AND planned additions.
+
 ---
 
 ## Stage 1 — Understand

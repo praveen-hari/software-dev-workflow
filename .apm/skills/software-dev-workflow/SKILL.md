@@ -43,7 +43,8 @@ When a task arrives, route based on what exists:
 |-----------|--------|
 | Vague idea, unclear requirements | → `openspec-explore` |
 | Ready to plan a change | → `openspec-propose` (creates proposal + design + specs + tasks) |
-| Design and build a full application UI | → `app-design` skill (understand → plan → design → build directly in target platform) |
+| Design and build a full application UI (greenfield) | → `app-design` skill (understand → plan → design → build directly in target platform) |
+| Add UI to an existing project (brownfield) | → `app-design` skill with brownfield flow (analyze existing → plan additions → build matching existing patterns) |
 | Change exists, ready to build | → `openspec-apply-change` + engineering skills (this is where this workflow adds value) |
 | Implementation done | → `openspec-sync-specs` then `openspec-archive-change` |
 | Trivial change (single file, obvious fix) | → Just do it. No ceremony needed. |
@@ -62,7 +63,9 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
 
 - Does the task involve UI/frontend code?
 - If YES → does `DESIGN.md` exist at the project root?
-  - If NO → STOP. Activate the `design-system` skill. Do not write UI code without it.
+  - If NO → check if the project already has an established visual style (existing CSS, theme files, component library).
+    - If existing style found → activate `design-system` skill to **extract** tokens from the existing codebase into `DESIGN.md`.
+    - If no existing style → STOP. Activate `design-system` skill to create from scratch.
   - If YES → `tokens.css` must also exist. All UI code MUST use its CSS variables. No hardcoded colors, fonts, spacing, or radii.
 - If NO UI work → skip this gate.
 
@@ -84,8 +87,9 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
   | Plain JS / no framework | JavaScript | `syncfusion/javascript-ui-controls-skills` |
 
   - **If Syncfusion component skills are installed** → MUST use them for component generation. They provide correct API usage, imports, and setup.
-  - **If not installed** → STOP. Tell the user: `npx skills add syncfusion/<framework>-ui-components-skills -y`. Only proceed without them if the user explicitly declines.
-  - **If no Syncfusion stack** → build UI manually with standard frontend practices.
+  - **If not installed** → check if the project already uses Syncfusion packages (e.g., `@syncfusion/ej2-*` in package.json or `Syncfusion.*` NuGet packages). If yes → STOP and suggest installing skills. If no Syncfusion packages → proceed without them.
+  - **If project uses a different component library** (Material UI, Ant Design, PrimeNG, etc.) → follow that library's patterns. Do not suggest Syncfusion.
+  - **If no component library** → build UI manually with standard frontend practices.
 - If NO UI work → skip this gate.
 
 ### Gate 4 — TDD (always)
