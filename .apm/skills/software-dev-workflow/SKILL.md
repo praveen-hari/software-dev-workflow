@@ -85,6 +85,7 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
   | `Wpf` in *.csproj | WPF | `syncfusion/wpf-ui-components-skills` |
   | `WindowsForms` in *.csproj | WinForms | `syncfusion/winforms-ui-components-skills` |
   | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-components-skills` |
+  | `pubspec.yaml` with `flutter` | Flutter | `syncfusion/flutter-ui-components-skills` |
   | ASP.NET Core project | ASP.NET Core | `syncfusion/aspnetcore-ui-components-skills` |
   | Plain JS / no framework | JavaScript | `syncfusion/javascript-ui-controls-skills` |
 

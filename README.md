@@ -62,6 +62,7 @@ npx skills add syncfusion/react-ui-components-skills -y
 | WPF | `npx skills add syncfusion/wpf-ui-components-skills -y` |
 | WinForms | `npx skills add syncfusion/winforms-ui-components-skills -y` |
 | .NET MAUI | `npx skills add syncfusion/maui-ui-components-skills -y` |
+| Flutter | `npx skills add syncfusion/flutter-ui-components-skills -y` |
 | ASP.NET Core | `npx skills add syncfusion/aspnetcore-ui-components-skills -y` |
 | JavaScript | `npx skills add syncfusion/javascript-ui-controls-skills -y` |
 
