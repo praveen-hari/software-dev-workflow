@@ -121,6 +121,8 @@ The design system must be approved before any code is written.
 
 Build screens directly in the target framework. No HTML prototypes.
 
+**⚠️ Before writing any code:** Output the pre-flight checklist from `workflow-rules.instructions.md`. Confirm all checks pass.
+
 **Engineering gates still apply:** TDD (Gate 4), incremental slices (Gate 5), code review (Gate 6), and atomic commits (Gate 7) from the `software-dev-workflow` skill are enforced during build.
 
 ### Step 1 — Detect stack and check Syncfusion skills

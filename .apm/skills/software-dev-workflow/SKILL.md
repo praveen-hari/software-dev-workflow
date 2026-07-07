@@ -53,6 +53,8 @@ When a task arrives, route based on what exists:
 
 Before writing any code, run through these gates top-to-bottom. Each gate must pass before moving to the next. Do not skip any.
 
+**⚠️ MANDATORY:** Output the pre-flight checklist from `workflow-rules.instructions.md` before proceeding through gates. This forces you to assess the project state before coding.
+
 ### Gate 1 — Spec exists (non-trivial work only)
 
 - Does an OpenSpec change exist for this work? (`openspec list --json`)
