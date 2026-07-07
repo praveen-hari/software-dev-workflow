@@ -111,7 +111,16 @@ Check `package.json` or `*.csproj` for the framework. If Syncfusion component sk
 npx skills add syncfusion/<framework>-ui-components-skills -y
 ```
 
-### Step 2 — Map screens to components
+### Step 2 — Configure theming
+
+**⚠️ MANDATORY:** After confirming the framework, consult the Syncfusion themes skill (e.g., `syncfusion-react-themes`) for detailed implementation guidance. This skill provides:
+- How to integrate `tokens.css` with Syncfusion's theming system
+- Correct CSS variable mapping between design tokens and Syncfusion theme variables
+- Theme registration and configuration for the chosen framework
+
+Do not skip this step — incorrect theming leads to visual inconsistencies between custom UI and Syncfusion components.
+
+### Step 3 — Map screens to components
 
 For each screen in the architecture, map UI elements to Syncfusion components:
 
@@ -132,7 +141,7 @@ For each screen in the architecture, map UI elements to Syncfusion components:
 | Tree navigation | TreeView |
 | Dashboard layout | DashboardLayout |
 
-### Step 3 — Build in priority order
+### Step 4 — Build in priority order
 
 Build P0 screens first, then P1, then P2. For each screen:
 
@@ -142,7 +151,7 @@ Build P0 screens first, then P1, then P2. For each screen:
 4. Include realistic sample data — never Lorem ipsum
 5. Wire up navigation between screens
 
-### Step 4 — Preview
+### Step 5 — Preview
 
 Start the dev server and open in the integrated browser to verify.
 
