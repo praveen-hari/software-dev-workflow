@@ -79,6 +79,7 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
   | `Blazor` in *.csproj | Blazor | `syncfusion/blazor-ui-components-skills` |
   | `Wpf` in *.csproj | WPF | `syncfusion/wpf-ui-components-skills` |
   | `WindowsForms` in *.csproj | WinForms | `syncfusion/winforms-ui-components-skills` |
+  | `Maui` in *.csproj | .NET MAUI | `syncfusion/maui-ui-components-skills` |
   | ASP.NET Core project | ASP.NET Core | `syncfusion/aspnetcore-ui-components-skills` |
   | Plain JS / no framework | JavaScript | `syncfusion/javascript-ui-controls-skills` |
 
