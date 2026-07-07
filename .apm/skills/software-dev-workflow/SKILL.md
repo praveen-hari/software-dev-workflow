@@ -88,4 +88,5 @@ The `design-system` skill creates both `DESIGN.md` (token definitions) and `toke
 - Stop on inconsistencies — name the confusion, wait for resolution
 - Prefer the boring, obvious solution
 - Stay in scope — no unsolicited renovation
+- Verify at runtime — "seems right" is never sufficient
 - Verify at runtime, don't assume
