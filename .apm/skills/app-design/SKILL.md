@@ -185,7 +185,27 @@ Build P0 screens first, then P1, then P2. For each screen:
 4. Include realistic sample data — never Lorem ipsum
 5. Wire up navigation between screens
 
-### Step 5 — Preview
+### Step 5 — Icon system
+
+Choose one icon library for the project and use it consistently. Do NOT mix libraries or default to emoji.
+
+| Library | Install | Framework Usage |
+|---------|---------|----------------|
+| `lucide` | `npm i lucide-react` / `lucide-vue-next` / `lucide-angular` | `<Home size={20} />` (React) |
+| `phosphor` | `npm i @phosphor-icons/react` / `vue` / `web` | `<House size={20} />` (React) |
+| `tabler` | `npm i @tabler/icons-react` / `vue` / `angular` | `<IconHome size={20} />` (React) |
+| `material` | `npm i @mui/icons-material` (React) / `@angular/material` | `<HomeOutlined />` (React) |
+| `bootstrap` | `npm i react-bootstrap-icons` / `bootstrap-icons` | `<House size={20} />` (React) |
+| `heroicons` | `npm i @heroicons/react` / `vue` | `<HomeIcon className="w-5 h-5" />` (React) |
+
+**Rules:**
+- Ask the user which icon library to use during Stage 1 (or detect from existing project)
+- Install the framework-native package — not CDN links
+- Use **only** the selected library — do not mix
+- Use icons for: nav items, buttons, stat cards, empty states, action menus
+- For Blazor/WPF/WinForms/MAUI — use the framework's built-in icon system or Syncfusion icons
+
+### Step 6 — Preview
 
 Start the dev server and open in the integrated browser to verify.
 
