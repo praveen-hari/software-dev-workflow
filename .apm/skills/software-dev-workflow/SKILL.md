@@ -79,28 +79,28 @@ Before writing any code, run through these gates top-to-bottom. Each gate must p
 
   - **If Syncfusion UI Builder is installed** → MUST activate it. Do not write UI manually.
   - **If not installed** → STOP. Tell the user: `apm install syncfusion/<framework>-ui-builder -t <target>`. Only proceed manually if the user explicitly declines.
-  - **If no Syncfusion stack** → use `frontend-ui-engineering` skill.
+  - **If no Syncfusion stack** → build UI manually with standard frontend practices.
 - If NO UI work → skip this gate.
 
 ### Gate 4 — TDD (always)
 
-- Every code change gets a failing test first, then implementation to make it pass.
-- Use `test-driven-development` skill. No exceptions.
+- Write a failing test first, then implement to make it pass. No exceptions.
+- Red → Green → Refactor per slice.
 
 ### Gate 5 — Incremental slices (always)
 
 - Build in vertical slices, not horizontal layers.
-- Use `incremental-implementation` skill. Each slice is a working, testable unit.
+- Each slice is a working, testable unit. Keep changes small (~100 lines).
 
 ### Gate 6 — Code review (before merge)
 
 - Every change gets reviewed before merge. No exceptions.
-- Use `code-review-and-quality` skill.
+- Check: correctness, readability, security, performance.
 
 ### Gate 7 — Atomic commits (on ship)
 
 - Clean, atomic commits with descriptive messages.
-- Use `git-workflow-and-versioning` skill.
+- One logical change per commit. No mixing unrelated changes.
 
 ## Behaviors
 
