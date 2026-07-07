@@ -15,7 +15,9 @@ Before writing ANY code (not just UI), output this checklist and confirm each it
 ```
 PRE-FLIGHT CHECK:
 □ Task type: [feature / bug / refactor / trivial]
-□ OpenSpec change exists: [yes / no / not needed (trivial)]
+□ Spec/proposal exists: [yes / no / not needed (trivial/bug)]
+  → If NO and task is feature or refactor: ❌ STOP. Run openspec-propose first.
+  → "not needed" is ONLY valid for trivial single-file changes or bug fixes.
 □ Brownfield project: [yes / no] → if yes, read existing patterns first
 □ UI work involved: [yes / no]
   □ DESIGN.md exists: [yes / no / extracting from existing]
@@ -25,7 +27,7 @@ PRE-FLIGHT CHECK:
 → All checks passed. Proceeding.
 ```
 
-If any check fails, STOP and resolve it before writing code.
+If any check shows ❌ STOP, resolve it before writing code. Do not rationalize skipping specs — "the requirements are obvious" is not a valid reason to skip.
 
 ## Workflow
 

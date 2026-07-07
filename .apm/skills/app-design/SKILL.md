@@ -64,7 +64,7 @@ Gather requirements through conversation. Ask **one or two questions at a time**
 
 ### Output
 
-Create the OpenSpec change via `openspec-propose` with the gathered requirements. This produces `proposal.md`, `design.md`, and `tasks.md` in the change folder.
+**⚠️ MANDATORY:** Create the OpenSpec change via `openspec-propose` with the gathered requirements. This produces `proposal.md`, `design.md`, and `tasks.md` in the change folder. Do NOT skip this step — do not jump to design or build without a proposal.
 
 Confirm with user before proceeding.
 
