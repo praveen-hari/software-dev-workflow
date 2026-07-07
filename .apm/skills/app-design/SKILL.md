@@ -123,7 +123,7 @@ npx skills add syncfusion/<framework>-ui-components-skills -y
 | Blazor | `syncfusion-blazor-themes` |
 | JavaScript | `syncfusion-javascript-themes` |
 | ASP.NET Core | `syncfusion-aspnetcore-theme` |
-| WPF | `syncfusion-wpf-themes` |
+| WPF | `syncfusion-wpf-theming` |
 | WinForms | `syncfusion-winforms-theming` |
 | .NET MAUI | `syncfusion-maui-theming` |
 
