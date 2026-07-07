@@ -43,6 +43,7 @@ When a task arrives, route based on what exists:
 |-----------|--------|
 | Vague idea, unclear requirements | → `openspec-explore` |
 | Ready to plan a change | → `openspec-propose` (creates proposal + design + specs + tasks) |
+| Design and build a full application UI | → `app-design` skill (understand → plan → design → build directly in target platform) |
 | Change exists, ready to build | → `openspec-apply-change` + engineering skills (this is where this workflow adds value) |
 | Implementation done | → `openspec-sync-specs` then `openspec-archive-change` |
 | Trivial change (single file, obvious fix) | → Just do it. No ceremony needed. |

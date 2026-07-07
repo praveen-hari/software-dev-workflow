@@ -41,6 +41,7 @@ openspec init --tools github-copilot
 
 This installs:
 - ✅ Workflow skill with 7 enforcement gates (spec, design system, Syncfusion skills, TDD, incremental slices, code review, atomic commits)
+- ✅ App design skill — full app design flow (understand → plan → design → build directly in target platform)
 - ✅ Design system skill for color palette, typography, and spacing tokens
 - ✅ Always-on rules (TDD, review before merge, incremental delivery)
 
@@ -107,9 +108,11 @@ software-dev-workflow/
 ├── README.md                                  # This file
 └── .apm/
     ├── skills/
+    │   ├── app-design/                        # Full app design → production code
+    │   │   └── SKILL.md
     │   ├── design-system/                     # Design tokens skill
     │   │   └── SKILL.md
-    │   └── software-dev-workflow/             # OpenSpec router + engineering skills
+    │   └── software-dev-workflow/             # OpenSpec router + engineering gates
     │       └── SKILL.md
     └── instructions/
         └── workflow-rules.instructions.md     # Always-on rules
