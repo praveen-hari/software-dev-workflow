@@ -14,7 +14,7 @@ OpenSpec is the orchestrator. This skill adds engineering discipline during impl
 ## Prerequisites
 
 - **OpenSpec CLI** must be installed (`npm install -g @fission-ai/openspec@latest`)
-- **OpenSpec must be initialized** in the project (`openspec init`) — this creates the `openspec/` directory and installs the OpenSpec skills (`openspec-explore`, `openspec-propose`, `openspec-apply-change`, `openspec-sync-specs`, `openspec-archive-change`)
+- **OpenSpec must be initialized** in the project (`openspec init --tools github-copilot`) — this creates the `openspec/` directory and installs the OpenSpec skills (`openspec-explore`, `openspec-propose`, `openspec-apply-change`, `openspec-sync-specs`, `openspec-archive-change`)
 - Those skills contain the detailed CLI instructions. This skill just routes to them.
 
 ## How It Works

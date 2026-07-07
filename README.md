@@ -36,7 +36,7 @@ apm install your-org/software-dev-workflow -t copilot
 
 # Initialize OpenSpec in your project
 cd your-project
-openspec init
+openspec init --tools github-copilot
 ```
 
 This installs:
