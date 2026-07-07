@@ -168,7 +168,7 @@ npx skills add syncfusion/<framework>-ui-components-skills -y
 | WPF | `syncfusion-wpf-theming` |
 | WinForms | `syncfusion-winforms-theming` |
 | .NET MAUI | `syncfusion-maui-theming` |
-| Flutter | `syncfusion-flutter-theming` |
+| Flutter | N/A — use `ThemeData` and Syncfusion's `SfTheme` directly |
 
 The themes skill provides:
 - How to integrate `tokens.css` with Syncfusion's theming system for that framework
